@@ -16,7 +16,7 @@ class SliderSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for ($i = 0; $i < $faker->randomNumber(1, true); $i++) {
             $data = new Slider();
-            $data->no_urut = $i;
+            $data->queue = $i;
             $data->title = $faker->sentence();
             $data->link = '#';
             $data->status = 1;

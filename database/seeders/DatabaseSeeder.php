@@ -17,16 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            BankSeeder::class,
             WebsiteSeeder::class,
-            KategoriSeeder::class,
-            TestimoniSeeder::class,
-            KontakSeeder::class,
             SliderSeeder::class,
-            ProvincesSeeder::class,
-            CitiesSeeder::class,
-            DistrictsSeeder::class,
-            VillagesSeeder::class
         ]);
     }
 }
