@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->integer('no_urut')->nullable();
+            $table->integer('queue')->nullable();
             $table->string('image')->nullable();
             $table->string('title')->nullable();
             $table->string('link')->nullable();

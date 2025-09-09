@@ -10,8 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('company_email', 'email');
+        Schema::create('stats', function (Blueprint $table) {
+            $table->uuid(column: 'id')->primary();
+            $table->string('label_id');
+            $table->string('label_en');
+            $table->integer('value')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -20,8 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('stats');
     }
 };
