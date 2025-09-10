@@ -29,31 +29,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var list<string>
      */
     protected $fillable = [
-        'company_name',
+        'name',
         'email',
-        'email_verified_at',
         'password',
-        'avatar',
-        'type',
         'status',
-        'founded_year',
-        'company_address',
-        'company_phone',
-        'company_website',
-        'contact_name',
-        'contact_phone',
-        'contact_department',
-        'contact_position',
-        'contact_email',
-        'business_type',
-        'total_employee',
-        'printing_line_total',
-        'process_printing',
-        'process',
-        'anual_turnover',
-        'film_production',
-        'joined_at',
-        'category'
     ];
 
     /**
@@ -74,39 +53,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'joined_at' => 'datetime',
             'password' => 'hashed',
-            'category' => 'string',
         ];
-    }
-
-
-    protected $appends = ['image_url'];
-
-    public function getImageUrlAttribute()
-    {
-        return $this->avatar ? asset('storage/user') . '/' . $this->avatar : 'https://via.placeholder.com/150x150.png';
-    }
-    public function getFormattedJoinedAtAttribute()
-    {
-        return $this->joined_at ? date('d-m-Y', strtotime($this->joined_at)) : '-';
-    }
-
-    public function sendEmailVerificationNotification()
-    {
-        $this->notify(new VerifyEmail);
-    }
-
-    public function setCategoryFromPrintingLineTotal($printingLineTotal)
-    {
-        if ($printingLineTotal === '1 - 3') {
-            $this->category = 'kecil';
-        } elseif ($printingLineTotal === '4 - 6') {
-            $this->category = 'menengah';
-        } elseif ($printingLineTotal === '≥ 7') {
-            $this->category = 'besar';
-        }
     }
 }
 

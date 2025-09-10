@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('label_id');
             $table->string('label_en');
             $table->integer('value')->default(0);
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

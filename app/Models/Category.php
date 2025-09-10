@@ -2,33 +2,39 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Testimoni extends Model
+class Category extends Model
 {
-    use  HasUuids;
+    use HasUuids;
+    protected $table = 'kategoris';
+
     protected $fillable = [
-        'no_urut',
-        'nama',
-        'type',
-        'rating',
-        'konten',
-        'image',
+        'title',
         'status',
     ];
+
+
     protected $appends = ['image_url'];
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('storage/testimoni') . '/' . $this->image : 'https://picsum.photos/300/300';
+        return $this->image ? asset('storage/kategori') . '/' . $this->image : 'https://picsum.photos/200/300';
     }
 
     public function getStatusTextAttribute()
     {
         $status = status_active();
         return isset($status[$this->status]) ? $status[$this->status] : '';
+    }
+
+    public function news(): HasMany
+    {
+        return $this->HasMany(News::class, 'category_id');
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->text('description_en')->nullable();
             $table->string('email')->nullable();
             $table->string('image')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

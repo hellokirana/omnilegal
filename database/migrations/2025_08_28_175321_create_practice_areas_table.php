@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('title_en');
             $table->text('description_id')->nullable();
             $table->text('description_en')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

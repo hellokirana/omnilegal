@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('disclaimers', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->longText('description_id');
             $table->longText('description_en');
             $table->dateTime('last_updated');

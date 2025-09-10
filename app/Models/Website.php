@@ -12,34 +12,29 @@ class Website extends Model
         'url',
         'nama',
         'caption',
-
         'favicon',
         'logo',
-
-        'map',
-        'alamat',
-        'email',
+        'maps',
         'phone',
-
+        'email',
+        'address_id',
+        'address_en',
         'facebook',
         'instagram',
-        'youtube',
+        'linkedin',
         'x',
     ];
 
-    protected $appends = ['logo_url'];
+    protected $appends = ['logo_url', 'favicon_url'];
 
     public function getLogoUrlAttribute()
     {
-        return $this->logo ? asset('storage/website') . '/' . $this->logo : '';
-    }
-    public function url_favicon()
-    {
-        return $this->favicon ? asset('storage/website') . '/' . $this->favicon : '';
+        return $this->logo ? asset('storage/website/' . $this->logo) : '';
     }
 
-    public function url_logo()
+    public function getFaviconUrlAttribute()
     {
-        return $this->logo ? asset('storage/website') . '/' . $this->logo : '';
+        return $this->favicon ? asset('storage/website/' . $this->favicon) : '';
     }
+
 }
