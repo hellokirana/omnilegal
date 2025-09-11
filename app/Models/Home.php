@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Disclaimer extends Model
+class Home extends Model
 {
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
+        'title_id',
+        'title_en',
         'description_id',
-        'description_en',
-        'last_updated'
+        'description_en'
     ];
 
     protected static function boot()

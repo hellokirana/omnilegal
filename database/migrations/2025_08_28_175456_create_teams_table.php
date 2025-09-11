@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('position_id');
-            $table->string('position_en');
+            $table->string('name')->nullable();
+            $table->string('position_id')->nullable();
+            $table->string('position_en')->nullable();
             $table->text('description_id')->nullable();
             $table->text('description_en')->nullable();
             $table->string('email')->nullable();

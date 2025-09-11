@@ -12,8 +12,9 @@ return new class extends Migration {
     {
         Schema::create('stats', function (Blueprint $table) {
             $table->uuid(column: 'id')->primary();
-            $table->string('label_id');
-            $table->string('label_en');
+            $table->string('image')->nullable();
+            $table->string('label_id')->nullable();
+            $table->string('label_en')->nullable();
             $table->integer('value')->default(0);
             $table->string('status')->nullable();
             $table->timestamps();

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Media;
-use App\Models\Kontak;
+
+use App\Models\Website;
 use App\Models\Slider;
-use App\Models\Kategori;
-use App\Models\Testimoni;
+use App\Models\Home;
+use App\Models\Stat;
+use App\Models\Team;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -16,12 +17,22 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $slider_all = Slider::where('status', 1)->orderBy('no_urut')->get();
-        $kategori_all = Kategori::where('status', 1)->orderBy('no_urut')->get();
-        $testimoni_all = Testimoni::where('status', 1)->orderBy('no_urut')->limit(5)->get();
-        $testimoni_founder = Testimoni::where('type', 'founder')->get();
-        $media_all = Media::with('kategori')->where('status', 1)->where('featured', 1)->latest()->limit(12)->get();
-        return view('frontend.welcome', compact('slider_all', 'kategori_all', 'media_all', 'testimoni_all', 'testimoni_founder'));
+        $website = Website::all();
+        $sliders = Slider::where('status', 1)
+            ->orderBy('queue')
+            ->get();
+        $homes = Home::all();
+        $stats = Stat::all();
+        $teams = Team::all();
+        $news = News::latest('published_at')->get();
+        return view('frontend.welcome', compact(
+            'website',
+            'sliders',
+            'homes',
+            'stats',
+            'teams',
+            'news'
+        ));
     }
 
     public function media(Request $request)

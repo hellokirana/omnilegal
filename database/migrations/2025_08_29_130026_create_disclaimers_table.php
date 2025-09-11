@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('disclaimers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->longText('description_id');
-            $table->longText('description_en');
-            $table->dateTime('last_updated');
+            $table->longText('description_id')->nullable();
+            $table->longText('description_en')->nullable();
+            $table->dateTime('last_updated')->nullable();
             $table->timestamps();
         });
     }

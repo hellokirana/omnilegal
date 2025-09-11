@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('services', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('image');
-            $table->string('title_id');
-            $table->string('title_en');
+            $table->string('image')->nullable();
+            $table->string('title_id')->nullable();
+            $table->string('title_en')->nullable();
             $table->text('description_id')->nullable();
             $table->text('description_en')->nullable();
             $table->string('status')->nullable();

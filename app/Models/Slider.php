@@ -12,9 +12,14 @@ class Slider extends Model
 
     protected $fillable = [
         'queue',
-        'title',
+        'title_id',
+        'title_en',
+        'description_id',
+        'description_en',
         'image',
         'link',
+        'link_caption_id',
+        'link_caption_en',
         'status',
     ];
 

@@ -2,26 +2,41 @@
 
 namespace Database\Seeders;
 
-use App\Models\Slider;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Str;
+use App\Models\Slider;
+
 class SliderSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $faker = Faker::create('id_ID');
-        for ($i = 0; $i < $faker->randomNumber(1, true); $i++) {
+
+        // misalnya mau isi 5 slider
+        for ($i = 1; $i <= 5; $i++) {
             $data = new Slider();
+            $data->id = (string) Str::uuid();
             $data->queue = $i;
-            $data->title = $faker->sentence();
+
+            // judul & deskripsi ID / EN
+            $data->title_id = $faker->sentence(3);
+            $data->title_en = $faker->sentence(3);
+            $data->description_id = $faker->paragraph();
+            $data->description_en = $faker->paragraph();
+
+            // gambar dummy & link
+            $data->image = 'slider' . $i . '.jpg'; // atau $faker->imageUrl()
             $data->link = '#';
+
+            // caption link
+            $data->link_caption_id = 'Selengkapnya';
+            $data->link_caption_en = 'Read More';
+
+            // status aktif
             $data->status = 1;
+
             $data->save();
         }
-        //
     }
 }
