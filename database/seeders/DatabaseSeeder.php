@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             WebsiteSeeder::class,
             SliderSeeder::class,
             HomeSeeder::class,
+            ServicesSeeder::class,
+            PracticeAreasSeeder::class,
+
         ]);
     }
 }
