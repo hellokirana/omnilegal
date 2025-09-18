@@ -1,5 +1,5 @@
 /* pricing 1 */
-.pricing{
+.pricing {
     padding: 120px 0 100px;
 }
 
@@ -25,7 +25,7 @@
     color: var(--text-color-1);
     font-size: 20px;
     font-weight: 500;
-    font-family: "Inter", sans-serif;
+    font-family: "CGOFont45", sans-serif;
 }
 
 .switcher_tab_btns li:last-child {
@@ -42,7 +42,7 @@
     width: 70px;
     content: "";
     border-radius: 40px;
-    background-color: rgba(var(--primary-color-rgb),0.1);
+    background-color: rgba(var(--primary-color-rgb), 0.1);
     cursor: pointer;
 }
 
@@ -70,9 +70,9 @@
 .pricing-block-one {
     position: relative;
     border-radius: 23px;
-    border: 1px solid #F5E4DF;
+    border: 1px solid #f5e4df;
     background-color: var(--white-color);
-	transition: 0.5s;
+    transition: 0.5s;
 }
 
 .table-header {
@@ -83,21 +83,23 @@
     transition: 0.5s;
     overflow: hidden;
 }
-.table-body{
+.table-body {
     padding: 40px 40px 24px;
     border-radius: 0 0 40px 40px;
     transition: 0.5s;
 }
-.pricing-block-one:hover .table-header{
+.pricing-block-one:hover .table-header {
     background-color: var(--black-color);
 }
-.pricing-block-one:hover .table-body{
+.pricing-block-one:hover .table-body {
     background-color: var(--bg-2);
 }
-.pricing-block-one:hover .table-header p, .pricing-block-one:hover .table-header h2, .pricing-block-one:hover .table-header sub{
+.pricing-block-one:hover .table-header p,
+.pricing-block-one:hover .table-header h2,
+.pricing-block-one:hover .table-header sub {
     color: var(--white-color) !important;
 }
-.table-header h6{
+.table-header h6 {
     display: inline-block;
     color: var(--primary-color);
     font-size: 20px;
@@ -110,7 +112,7 @@
     margin-bottom: 20px;
     transition: 0.5s;
 }
-.table-header p{
+.table-header p {
     font-size: 16px;
     transition: 0.5s;
 }
@@ -122,7 +124,7 @@
     padding: 10px 0 0px;
     transition: 0.5s;
 }
-.table-header sub{
+.table-header sub {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -149,28 +151,28 @@
     color: var(--text-color-1);
     font-weight: 400;
     font-family: "Open Sans", sans-serif;
-	transition: 0.5s;
+    transition: 0.5s;
     margin-bottom: 10px;
     display: flex;
 }
 
-.pricing-block-one ul.pricing-list li i{
+.pricing-block-one ul.pricing-list li i {
     margin-right: 5px;
 }
 
-.pricing-block-one  .btn-1 {
+.pricing-block-one .btn-1 {
     margin: 15px 0 15px;
     padding: 15px 60px;
 }
 
-
 /* ----------------------------------------
 pricing two
 ------------------------------------------- */
-.pricing-two{
+.pricing-two {
     background-color: var(--black-color);
 }
-.pricing-two .common-title h3, .pricing-two .switcher_tab_btns li{
+.pricing-two .common-title h3,
+.pricing-two .switcher_tab_btns li {
     color: var(--white-color);
 }
 .pricing-two .switcher_tab_btns:before {
@@ -179,29 +181,28 @@ pricing two
 .pricing-two .pricing-block-one:hover .table-header {
     background-color: var(--secondary-color);
 }
-.pricing-two .table-body, .pricing-two .pricing-block-one{
-    background-color: #062D4E;
-    border: 1px solid #062D4E;
+.pricing-two .table-body,
+.pricing-two .pricing-block-one {
+    background-color: #062d4e;
+    border: 1px solid #062d4e;
 }
 .pricing-two .pricing-block-one:hover .table-body {
     background-color: var(--black-color);
-    border-radius: 0 0 24px 24px; 
+    border-radius: 0 0 24px 24px;
 }
 .pricing-two .pricing-block-one ul.pricing-list li {
     color: var(--bg-3);
 }
-.pricing-two .pricing-block-one  .btn-1 {
+.pricing-two .pricing-block-one .btn-1 {
     background-color: transparent;
     border: 1px solid var(--primary-color);
 }
-.pricing-two .pricing-block-one  .btn-1::after{
+.pricing-two .pricing-block-one .btn-1::after {
     background-color: var(--primary-color);
 }
 /* ----------------------------------------
 pricing two
 ------------------------------------------- */
-
-
 
 /* ----------------------------------------
 Responsive
@@ -224,7 +225,7 @@ Responsive
 }
 
 /* Tablet Layout: 768px. */
-@media only screen and (min-width: 768px) and (max-width: 991px){
+@media only screen and (min-width: 768px) and (max-width: 991px) {
     .pricing {
         padding: 100px 0 70px;
     }
@@ -240,7 +241,7 @@ Responsive
 }
 
 /* Mobile Layout: 320px. */
-@media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px) {
     .pricing {
         padding: 80px 0 50px;
     }

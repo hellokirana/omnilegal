@@ -22,45 +22,50 @@ TABLE OF CONTENT
 TABLE OF CONTENT         
 ------------------------------------------------------------ */
 
-
 /* module css */
-@import url('module-css/01-header.css');
-@import url('module-css/02-mobile-menu.css');
-@import url('module-css/03-banner.css');
-@import url('module-css/04-footer.css');
-@import url('module-css/05-categories.css');
-@import url('module-css/06-services.css');
-@import url('module-css/07-featured.css');
-@import url('module-css/08-rewards.css');
-@import url('module-css/09-pricing.css');
-@import url('module-css/10-counter.css');
-@import url('module-css/11-blog.css');
-@import url('module-css/12-testimonial.css');
-@import url('module-css/13-app.css');
-@import url('module-css/14-search-bar.css');
-@import url('module-css/15-choose.css');
-@import url('module-css/16-contact.css');
-
+@import url("module-css/01-header.css");
+@import url("module-css/02-mobile-menu.css");
+@import url("module-css/03-banner.css");
+@import url("module-css/04-footer.css");
+@import url("module-css/05-categories.css");
+@import url("module-css/06-services.css");
+@import url("module-css/07-featured.css");
+@import url("module-css/08-rewards.css");
+@import url("module-css/09-pricing.css");
+@import url("module-css/10-counter.css");
+@import url("module-css/11-blog.css");
+@import url("module-css/12-testimonial.css");
+@import url("module-css/13-app.css");
+@import url("module-css/14-search-bar.css");
+@import url("module-css/15-choose.css");
+@import url("module-css/16-contact.css");
 
 /* css plugings */
-@import url('01-global.css');
-@import url('bootstrap.css');
-@import url('color.css');
-@import url('responsive.css');
-@import url('all.min.css');
-@import url('animate.css');
-@import url('search-popup.css');
-@import url('flatpickr-min.css');
-@import url('icomoon.css');
-@import url('swiper.min.css');
-@import url('elpath.css');
-@import url('select2.min.css');
-@import url('nice-select.css');
-@import url('odometer-theme-default.css');
-@import url('magnific-popup.css');
-@import url('nouislider.min.css');
+@import url("01-global.css");
+@import url("bootstrap.css");
+@import url("color.css");
+@import url("responsive.css");
+@import url("all.min.css");
+@import url("animate.css");
+@import url("search-popup.css");
+@import url("flatpickr-min.css");
+@import url("icomoon.css");
+@import url("swiper.min.css");
+@import url("elpath.css");
+@import url("select2.min.css");
+@import url("nice-select.css");
+@import url("odometer-theme-default.css");
+@import url("magnific-popup.css");
+@import url("nouislider.min.css");
 
-.form-control{
+@font-face {
+    font-family: "CGOFont 45";
+    src: url("../fonts/cgomega/cgor45w.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.form-control {
     border-radius: 8px;
     border: 1px solid var(--border-color-1);
     color: #000 !important;
@@ -68,7 +73,7 @@ TABLE OF CONTENT
     padding-left: 10px !important;
 }
 
-.form-control:focus{
+.form-control:focus {
     border-radius: 8px;
     border: 1px solid var(--border-color-1) !important;
     color: #000 !important;

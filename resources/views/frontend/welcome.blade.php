@@ -9,14 +9,12 @@
             <div class="swiper-container">
                 <div class="swiper single-item-carousel">
                     <div class="swiper-wrapper">
-                        @forelse($slider_all as $slider)
+                        @forelse($sliders as $slider)
                             <div class="swiper-slide testimonial-slider-item">
                                 <a href="{{ $slider->link }}" target="_blank">
                                     <img src="{{ $slider->image_url }}" class="w-100">
                                 </a>
                             </div>
-
-
 
                         @empty
                         @endforelse
@@ -73,7 +71,7 @@
                 <h3>Recent Media & News</h3>
             </div>
             <div class="row g-4">
-                @forelse($media_all as $media)
+                @forelse($news as $media)
                     <div class="col-lg-4 col-md-6">
                         <div class="featured-single">
                             <div class="featured-single-image">
@@ -101,120 +99,6 @@
         </div>
     </section>
     <!-- featured -->  
-
-<!-- organization structure -->
-<section class="organization-structure py-5">
-    <div class="container text-center">
-        <div class="common-title text-center mb-4">
-            <h6>2023 - 2026</h6>
-            <h3>Organizational Structure</h3>
-        </div>
-
-        <div class="about-page-image">
-            <img src="{{ asset('assets/images/resource/structure.png') }}" alt="image" style="max-width: 100%; width: 500px; height: auto;">
-        </div>
-
-            
-            {{-- <!-- First -->
-            <div class="org-row">
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Vice Supervisor</h5>
-                        <span class="badge bg-primary">Johanes Julia</span>
-                    </div>
-                </div>
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Chief Supervisor</h5>
-                        <span class="badge bg-primary">Bong Harly</span>
-                    </div>
-                </div>
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Supervisor</h5>
-                        <span class="badge bg-primary">Se Kwok Rahardjo</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="vertical-line"></div>
-            
-            <!-- Second -->
-            <div class="org-row">
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Treasurer</h5>
-                        <span class="badge bg-success">Jeffrey Halim</span>
-                    </div>
-                </div>
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Chairman</h5>
-                        <span class="badge bg-success">Timothy Cahyadi</span>
-                    </div>
-                </div>
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Secretary</h5>
-                        <span class="badge bg-success">Purnomo Widjaja</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="vertical-line"></div>
-            
-            <!-- Third -->
-            <div class="org-row">
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Executor</h5>
-                        <span class="badge bg-secondary">Ferry Bunarjo</span>
-                    </div>
-                </div>
-                <div class="org-box">
-                    <div class="box">
-                        <h5>Executor</h5>
-                        <span class="badge bg-secondary">Siti Maia Ikhsan</span>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-    </div>
-</section>
-<!-- organization structure -->
-
- <!-- testimonial -->
-    <section class="testimonial">
-        <div class="container">
-            <div class="testimonial-container">
-                <div class="common-title text-center">
-                    <h3>Our Founders</h3>
-                </div>
-                <div class="testimonial-carousel">
-                    <div class="swiper-container">
-                        <div class="swiper member-carousel">
-                            <div class="swiper-wrapper">
-                                @foreach($testimoni_founder as $testimoni)
-                                    <div class="swiper-slide text-center">
-                                        <div class="member-avatar-box">
-                                            <img src="{{ $testimoni->image_url }}" alt="{{ $testimoni->nama }}" class="member-avatar">
-                                            <h5 class="member-name">{{ $testimoni->nama }}</h5>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="swiper-button-next"><i class="fa-regular fa-angle-right"></i></div>
-                        <div class="swiper-button-prev"><i class="fa-sharp fa-regular fa-angle-left"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>    
-    <!-- testimonial -->
 
 @endsection
 @push('scripts')

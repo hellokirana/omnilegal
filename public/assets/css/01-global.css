@@ -1,11 +1,17 @@
 /* 
-	font-family: "Inter", sans-serif;
+	font-family: "CGOFont45", sans-serif;
 	font-family: "Open Sans", sans-serif;
  */
 
-/* Google font */
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap");
-
+/* Google font
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap"); */
+@font-face {
+    font-family: "CGOFont45";
+    src: url("../fonts/cgomega/cgor45w.woff") format("woff"),
+        url("../fonts/cgomega/cgor45w.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
 * {
     margin: 0px;
     padding: 0px;
@@ -181,7 +187,7 @@ body {
     line-height: 34px;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
-    font-family: "Inter", sans-serif;
+    font-family: "CGOFont45", sans-serif;
 }
 ::selection {
     background-color: var(--primary-color);
@@ -203,7 +209,7 @@ a:focus {
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
-    font-family: "Inter", sans-serif;
+    font-family: "CGOFont45", sans-serif;
 }
 
 a:hover {
@@ -215,6 +221,7 @@ a:hover {
     transition: 0.5s;
 }
 
+p,
 h1,
 .h1,
 h2,
@@ -230,7 +237,7 @@ h6,
     position: relative;
     font-weight: normal;
     margin: 0px;
-    font-family: "Inter", sans-serif;
+    font-family: "CGOFont45", sans-serif !important;
     color: var(--black-color);
 }
 
@@ -462,7 +469,7 @@ Preloader start
 }
 
 .handle-preloader .animation-preloader .txt-loading .letters-loading {
-    font-family: "Inter", sans-serif;
+    font-family: "CGOFont45", sans-serif;
     font-weight: 700;
     letter-spacing: 15px;
     display: inline-block;

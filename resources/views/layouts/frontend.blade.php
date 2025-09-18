@@ -4,25 +4,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Rotokemas Indonesia</title>
+    <title>Omnilegal</title>
 
     <!-- Stylesheets -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.jpg') }}" type="image/x-icon">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <!-- Favicon -->
 
-    <!-- Di dalam <head> -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-XyGZ1AvwLhkdME9YyUw5o2qvWZt1Qo8h1FZZbGQUFdA+cS9bYOzCXh3n4gxQ3VnTZhKLG1rKcsEtTXCvC8Ybnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-XyGZ1AvwLhkdME9YyUw5o2qvWZt1Qo8h1FZZbGQUFdA+cS9bYOzCXh3n4gxQ3VnTZhKLG1rKcsEtTXCvC8Ybnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
 
 </head>
 
@@ -31,19 +26,32 @@
     <div class="page-wrapper">
 
         <!-- preloader -->
-        <div class="loader-wrap">
-            <div class="preloader">
-                <div class="preloader-close">x</div>
-                <div id="handle-preloader" class="handle-preloader">
-                    <div class="animation-preloader">
-                        <div class="loader-image">
-                            <img src="{{ asset('assets/images/loader.gif') }}" alt="loader">
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="loader-wrap">
+  <div class="preloader">
+    <div class="preloader-close">x</div>
+    <div id="handle-preloader" class="handle-preloader">
+      <div class="animation-preloader">
+
+        <!-- loader hourglass dari Uiverse -->
+        <div class="hourglassBackground">
+          <div class="hourglassContainer">
+            <div class="hourglassCurves"></div>
+            <div class="hourglassCapTop"></div>
+            <div class="hourglassGlassTop"></div>
+            <div class="hourglassSand"></div>
+            <div class="hourglassSandStream"></div>
+            <div class="hourglassCapBottom"></div>
+            <div class="hourglassGlass"></div>
+          </div>
         </div>
-        <!-- preloader end -->
+        <!-- /loader hourglass -->
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+
 
         <!-- header -->
         <header class="main-header header-style-one">
@@ -54,8 +62,10 @@
                     <div class="inner-container d-flex align-items-center justify-content-between">
                         <div class="header-left-column">
                             <div class="logo-box">
-                                <div class="logo"><a href="{{ url('/') }}"><img
-                                            src="{{ asset('assets/images/logo.png') }}" alt="logo"></a></div>
+                                <div class="logo"><a href="{{ url('/') }}">
+                                    <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
+                                 <span class="logo-text ms-2">OMNILEGAL</span>
+                                </a></div>
                             </div>
                         </div>
                         <div class="header-center-column">
@@ -76,16 +86,22 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="header-right-column d-flex  align-items-center">
+                        <div class="header-right-column d-flex align-items-center">
                             <div class="header-right-btn-area">
-                                @guest
-                                    <a href="{{ url('login') }}" class="btn-1">Login Admin</a>
-                                    {{-- <a href="{{ url('register') }}" class="btn-1">Register</a> --}}
-                                @else
-                                    <a href="{{ url('home') }}" class="btn-1">Admin Area</a>
-                                @endguest
-                            </div>
+                                {{-- Language Switch --}}
+                                <div class="language-switch">
+                            <input type="radio" name="lang" id="lang-id" {{ app()->getLocale() == 'id' ? 'checked' : '' }}>
+                            <label for="lang-id">ID</label>
+
+                            <input type="radio" name="lang" id="lang-en" {{ app()->getLocale() == 'en' ? 'checked' : '' }}>
+                            <label for="lang-en">EN</label>
+
+                            <span class="switch-highlight"></span>
                         </div>
+
+    </div>
+</div>
+
                     </div>
                 </div>
             </div>
@@ -99,7 +115,8 @@
                             <div class="left-column d-flex align-items-center">
                                 <div class="logo-box">
                                     <div class="logo"><a href="{{ url('/') }}"><img
-                                                src="{{ asset('assets/images/logo.png') }}" alt="logo"></a></div>
+                                                src="{{ asset('assets/images/logo.png') }}" alt="logo">
+                                            <span class="logo-text ms-2">OMNILEGAL</span></a></div>
                                 </div>
                             </div>
 
