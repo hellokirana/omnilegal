@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->string('label_id')->nullable();
             $table->string('label_en')->nullable();
-            $table->integer('value')->default(0);
+            $table->string('value')->default(0);
             $table->string('status')->nullable();
             $table->timestamps();
         });

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\StatController;
+use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Data\NewsController;
 use App\Http\Controllers\Data\AgendaController;
 use App\Http\Controllers\Data\MemberController;
@@ -55,7 +57,19 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+
+    // CRUD Home
+    Route::get('/content', [ContentController::class, 'index'])->name('content.index');
+    Route::post('/content/store', [ContentController::class, 'storeContent'])->name('content.store');
+    Route::put('/content/update/{id}', [ContentController::class, 'updateContent'])->name('content.update');
+
+    // CRUD Stats
+    Route::get('/stat', [StatController::class, 'index'])->name('stats.index');
+    Route::post('/stat/store', [StatController::class, 'storeStat'])->name('stats.store');
+    Route::put('/stat/update/{id}', [StatController::class, 'updateStat'])->name('stats.update');
+    Route::delete('/stat/delete/{id}', [StatController::class, 'deleteStat'])->name('stats.delete');
+
     Route::get('/profil', [App\Http\Controllers\HomeController::class, 'profil'])->name('profil');
     Route::post('/update_profil', [App\Http\Controllers\HomeController::class, 'update_profil'])->name('update_profil');
     Route::get('/media/{slug}', [App\Http\Controllers\HomeController::class, 'media_detail'])->name('media.detail');

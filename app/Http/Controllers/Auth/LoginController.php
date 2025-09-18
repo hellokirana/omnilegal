@@ -5,95 +5,41 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('approved')->only('login');
     }
 
-    /**
-     * Handle a login request to the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function login(Request $request)
     {
-        // Validasi input
-        // $this->validate($request, [
-        //     'email' => 'required|string|email',
-        //     'password' => 'required|string',
-        //     'g-recaptcha-response' => 'required', // Validasi reCAPTCHA
-        // ]);
+        // Validasi input dasar
+        $this->validate($request, [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
 
-        // Validasi reCAPTCHA
-        // $response = $request->input('g-recaptcha-response');
-        // $secret = env('RECAPTCHA_SECRET_KEY');
-
-        // $captchaResponse = Http::asForm()->post("https://www.google.com/recaptcha/api/siteverify", [
-        //     'secret' => $secret,
-        //     'response' => $response,
-        // ]);
-
-        // $captchaData = $captchaResponse->json();
-
-        // if (!$captchaData['success']) {
-        //     return back()->withErrors(['g-recaptcha-response' => 'CAPTCHA validation failed.']);
-
-        // }
-
-        // Jika validasi CAPTCHA berhasil, lanjutkan dengan login
+        // Proses login
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
 
-        // Jika login gagal, kembalikan ke form dengan error
+        // Jika gagal login
         return $this->sendFailedLoginResponse($request);
     }
+
     protected function attemptLogin(Request $request)
     {
-        // Check user status before attempting credentials
-        $user = \App\Models\User::where('email', $request->email)->first();
-
-        if ($user && $user->status !== 'approved') {
-            // Set error message in session
-            session()->flash('status_error', 'Your account is pending approval by an administrator. You will be notified by email once approved.');
-            return false;
-        }
-
+        // Login tanpa cek status dan tanpa captcha
         return $this->guard()->attempt(
             $this->credentials($request),
             $request->boolean('remember')
         );
     }
 }
-

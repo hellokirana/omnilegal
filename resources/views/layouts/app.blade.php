@@ -36,8 +36,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
+                <a class="navbar-brand" href="{{ url('/home') }}">
+                    <span class="logo-text ms-2">OMNILEGAL Admin Panel</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -67,9 +67,21 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('home') }}">dashboard</a>
-                            </li>
+                        <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('home') }}">home</a>
+                                </li>
+                            <li class="nav-item dropdown">
+                                    <a id="layanan_menu" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Landing Page Section
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
+                                        <a class="dropdown-item" href="{{ route('content.index') }}">Text Content</a>
+                                        <a class="dropdown-item" href="{{ url('data/kategori') }}">Slider</a>
+                                        <a class="dropdown-item" href="{{ route('stats.index') }}">Stat</a>
+
+                                    </div>
+                                </li>
                             @hasanyrole('superadmin|member')
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('news') }}">news</a>

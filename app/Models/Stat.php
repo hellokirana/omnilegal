@@ -13,7 +13,7 @@ class Stat extends Model
         'label_id',
         'label_en',
         'value',
-        'image',   // icon / gambar
+        'image',
         'status'
     ];
 

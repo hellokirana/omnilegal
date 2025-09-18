@@ -1,52 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Home;
 use App\Models\Stat;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class StatController extends Controller
 {
     public function index()
     {
-        $homes = Home::paginate(5);
         $stats = Stat::paginate(5);
 
-        return view('home', compact('homes', 'stats'));
+        return view('admin.stat.index', compact('stats'));
     }
 
-    // ================== HOME ==================
-    public function storeHome(Request $request)
-    {
-        $request->validate([
-            'title_id' => 'required|string|max:255',
-            'title_en' => 'required|string|max:255',
-            'description_id' => 'required|string',
-            'description_en' => 'required|string',
-        ]);
-
-        Home::create($request->only(['title_id', 'title_en', 'description_id', 'description_en']));
-
-        return redirect()->back()->with('success', 'Home created successfully!');
-    }
-
-    public function updateHome(Request $request, $id)
-    {
-        $request->validate([
-            'title_id' => 'required|string|max:255',
-            'title_en' => 'required|string|max:255',
-            'description_id' => 'required|string',
-            'description_en' => 'required|string',
-        ]);
-
-        $home = Home::findOrFail($id);
-        $home->update($request->only(['title_id', 'title_en', 'description_id', 'description_en']));
-
-        return redirect()->back()->with('success', 'Home updated successfully!');
-    }
-
-    // ================== STATS ==================
     public function storeStat(Request $request)
     {
         $request->validate([
