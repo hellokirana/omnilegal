@@ -43,6 +43,6 @@ class ContentController extends Controller
         $home = Home::findOrFail($id);
         $home->update($request->only(['title_id', 'title_en', 'description_id', 'description_en']));
 
-        return redirect()->back()->with('success', 'Text updated successfully!');
+        return redirect()->back();
     }
 }
