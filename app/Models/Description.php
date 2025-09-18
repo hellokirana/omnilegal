@@ -11,6 +11,7 @@ class Description extends Model
     use HasUuids;
     public $incrementing = false;
     protected $keyType = 'string';
+
     protected $fillable = [
         'about_id',
         'about_en',
@@ -27,4 +28,52 @@ class Description extends Model
         'disclaimer_id',
         'disclaimer_en',
     ];
+
+    protected function getLocalized($field)
+    {
+        $locale = app()->getLocale();
+        $column = "{$field}_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->{$field . '_en'};
+    }
+
+
+    public function getAboutAttribute()
+    {
+        return $this->getLocalized('about');
+    }
+
+    public function getShortAboutAttribute()
+    {
+        return $this->getLocalized('short_about');
+    }
+
+    public function getTeamAttribute()
+    {
+        return $this->getLocalized('team');
+    }
+
+    public function getCareerAttribute()
+    {
+        return $this->getLocalized('career');
+    }
+
+    public function getServiceAttribute()
+    {
+        return $this->getLocalized('service');
+    }
+
+    public function getPracticeAttribute()
+    {
+        return $this->getLocalized('practice');
+    }
+
+    public function getDisclaimerAttribute()
+    {
+        return $this->getLocalized('disclaimer');
+    }
 }

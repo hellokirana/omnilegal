@@ -31,7 +31,48 @@ class News extends Model
 
     protected $dates = ['published_at'];
 
-    protected $appends = ['image_url', 'document_id_url', 'document_en_url'];
+    protected $appends = [
+        'image_url',
+        'document_id_url',
+        'document_en_url',
+    ];
+
+    /* =====================
+     *  Accessors
+     * ===================== */
+
+    // Ambil field bilingual sesuai locale
+    protected function getLocalized($field)
+    {
+        $locale = app()->getLocale();
+        $column = "{$field}_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->{$field . '_en'};
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->getLocalized('title');
+    }
+
+    public function getContentAttribute()
+    {
+        return $this->getLocalized('content');
+    }
+
+    public function getSlugAttribute()
+    {
+        return $this->getLocalized('slug');
+    }
+
+    public function getDocumentAttribute()
+    {
+        return $this->getLocalized('document');
+    }
 
     public function getImageUrlAttribute()
     {
@@ -60,6 +101,9 @@ class News extends Model
         return isset($status[$this->status]) ? $status[$this->status] : '';
     }
 
+    /* =====================
+     *  Relations
+     * ===================== */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');

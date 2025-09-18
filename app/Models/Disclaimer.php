@@ -19,11 +19,23 @@ class Disclaimer extends Model
     protected static function boot()
     {
         parent::boot();
+
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
     }
-}
 
+    public function getDescriptionAttribute()
+    {
+        $locale = app()->getLocale();
+        $column = "description_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->description_en;
+    }
+}

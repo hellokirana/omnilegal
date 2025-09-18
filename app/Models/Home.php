@@ -20,11 +20,41 @@ class Home extends Model
     protected static function boot()
     {
         parent::boot();
+
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
     }
-}
 
+    /**
+     * Ambil title sesuai locale (default EN)
+     */
+    public function getTitleAttribute()
+    {
+        $locale = app()->getLocale();
+        $column = "title_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->title_en;
+    }
+
+    /**
+     * Ambil description sesuai locale (default EN)
+     */
+    public function getDescriptionAttribute()
+    {
+        $locale = app()->getLocale();
+        $column = "description_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->description_en;
+    }
+}

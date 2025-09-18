@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Service extends Model 
 {
-    use  HasUuids;
+    use HasUuids;
+
     protected $fillable = [
         'image',
         'title_id',
@@ -20,11 +17,40 @@ class Service extends Model
         'description_en',
         'status'
     ];
+
     protected $appends = ['image_url'];
+
+    /* =====================
+     *  Accessors
+     * ===================== */
+
+    protected function getLocalized($field)
+    {
+        $locale = app()->getLocale();
+        $column = "{$field}_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->{$field . '_en'};
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->getLocalized('title');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->getLocalized('description');
+    }
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('storage/service') . '/' . $this->image : 'https://loremflickr.com/800/600';
+        return $this->image
+            ? asset('storage/service/' . $this->image)
+            : 'https://loremflickr.com/800/600';
     }
 
     public function getStatusTextAttribute()

@@ -23,12 +23,43 @@ class Slider extends Model
         'status',
     ];
 
-
     protected $appends = ['image_url'];
+
+    /* =====================
+     *  Accessors Bilingual
+     * ===================== */
+    protected function getLocalized($field)
+    {
+        $locale = app()->getLocale();
+        $column = "{$field}_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->{$field . '_en'};
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->getLocalized('title');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->getLocalized('description');
+    }
+
+    public function getLinkCaptionAttribute()
+    {
+        return $this->getLocalized('link_caption');
+    }
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('storage/slider') . '/' . $this->image : 'https://loremflickr.com/1280/720?random=' . $this->no_urut;
+        return $this->image
+            ? asset('storage/slider/' . $this->image)
+            : 'https://loremflickr.com/1280/720?random=' . $this->queue;
     }
 
     public function getStatusTextAttribute()
@@ -36,5 +67,4 @@ class Slider extends Model
         $status = status_active();
         return isset($status[$this->status]) ? $status[$this->status] : '';
     }
-
 }

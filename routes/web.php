@@ -11,6 +11,14 @@ use App\Http\Controllers\AgendaMemberController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Data\AgendaParticipantController;
 
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['id', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+});
+
+
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index']);
 Route::get('/media', [App\Http\Controllers\FrontendController::class, 'media']);
 Route::get('/media/{id}', [App\Http\Controllers\FrontendController::class, 'media_detail']);

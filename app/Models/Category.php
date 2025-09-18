@@ -2,30 +2,34 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Category extends Model
 {
     use HasUuids;
-    protected $table = 'kategoris';
+    protected $table = 'categories';
 
     protected $fillable = [
-        'title',
+        'title_id',
+        'title_en',
         'status',
     ];
 
-
-    protected $appends = ['image_url'];
-
-    public function getImageUrlAttribute()
+    public function getTitleAttribute()
     {
-        return $this->image ? asset('storage/kategori') . '/' . $this->image : 'https://picsum.photos/200/300';
+        $locale = app()->getLocale();
+        $field = "title_" . $locale;
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$field})) {
+            return $this->{$field};
+        }
+
+        // fallback ke EN
+        return $this->title_en;
     }
+
 
     public function getStatusTextAttribute()
     {
