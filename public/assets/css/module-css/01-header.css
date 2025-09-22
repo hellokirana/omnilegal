@@ -86,9 +86,16 @@ Header Lower
     line-height: 24px;
     color: var(--black-color);
     font-weight: 400;
+    transition: all 0.3s ease;
 }
-.main-menu .navigation > li.current > a,
+
+/* Hover effect - scale up smooth */
 .main-menu .navigation > li > a:hover {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+.main-menu .navigation > li.current > a {
     color: var(--primary-color);
 }
 .navigation .active {
@@ -333,9 +340,11 @@ Header Lower
     border: 1px solid var(--border-color-1);
     color: var(--black-color);
     padding: 11px 35px;
+    transition: all 0.3s ease;
 }
 .header-right-btn-area .btn-1:first-child:hover {
     color: var(--white-color);
+    transform: scale(1.05);
 }
 .header-right-column {
     gap: 30px;
@@ -344,11 +353,15 @@ Header Lower
     font-size: 16px;
     margin-right: 6px;
 }
+
+/* Language Switch Styles - Updated with Rounded Design */
 .language-switch {
     position: relative;
     display: inline-flex;
     overflow: hidden;
     background: #fff;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
 }
 
 .language-switch input {
@@ -361,79 +374,54 @@ Header Lower
     color: var(--black-color);
     font-weight: 500;
     text-align: center;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 2;
+    border-radius: 20px;
 }
 
-/* Highlight biru yang geser */
+/* Highlight biru yang geser - Updated with Rounded Style */
 .language-switch .switch-highlight {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
+    top: 2px;
+    left: 2px;
+    width: calc(50% - 2px);
+    height: calc(100% - 4px);
     background: #303192;
-    border-radius: 0;
+    border-radius: 18px;
     transition: transform 0.3s ease;
     z-index: 1;
 }
 
 /* Posisi default (ID) */
-#lang-id:checked ~ .switch-highlight {
+#lang-id:checked ~ .switch-highlight,
+#lang-id-sticky:checked ~ .switch-highlight,
+#lang-id-mobile:checked ~ .switch-highlight {
     transform: translateX(0%);
 }
 
 /* Kalau EN dipilih */
-#lang-en:checked ~ .switch-highlight {
+#lang-en:checked ~ .switch-highlight,
+#lang-en-sticky:checked ~ .switch-highlight,
+#lang-en-mobile:checked ~ .switch-highlight {
     transform: translateX(100%);
 }
 
 /* Warna teks sesuai pilihan */
-#lang-id:checked + label {
+#lang-id:checked + label,
+#lang-id-sticky:checked + label,
+#lang-id-mobile:checked + label {
     color: #fff;
 }
-#lang-en:checked + label {
+#lang-en:checked + label,
+#lang-en-sticky:checked + label,
+#lang-en-mobile:checked + label {
     color: #fff;
 }
 
-/* Efek diagonal dual fill hover untuk link menu */
-.main-menu .navigation > li > a {
-    position: relative;
-    display: inline-block;
-    transition: all 0.5s;
-    z-index: 2;
-    color: var(--black-color);
-    text-decoration: none;
-}
-
-/* sebelum & sesudah */
-.main-menu .navigation > li > a::before,
-.main-menu .navigation > li > a::after {
-    content: "";
-    position: absolute;
-    height: 50%;
-    width: 0;
-    background-color: rgba(0, 19, 112, 0.256);
-    transition: all 0.5s;
-    z-index: -1;
-}
-
-/* fill atas */
-.main-menu .navigation > li > a::before {
-    right: 0;
-    top: 0;
-}
-
-/* fill bawah */
-.main-menu .navigation > li > a::after {
-    left: 0;
-    bottom: 0;
-}
-
-/* saat hover fill jadi penuh */
-.main-menu .navigation > li > a:hover::before,
-.main-menu .navigation > li > a:hover::after {
-    width: 100%;
+/* Mobile Menu Language Switch */
+.mobile-menu .language-switch {
+    margin: 20px 0;
+    justify-content: center;
 }
 
 /* ==============================
@@ -493,7 +481,7 @@ Sticky Header
     width: 100%;
     padding: 0px 0px;
     z-index: -1;
-    -webkit-transition: top 300ms ease;
+    -webkit-transition : top 300ms ease;
     -o-transition: top 300ms ease;
     transition: top 300ms ease;
 }

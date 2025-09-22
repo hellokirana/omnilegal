@@ -128,11 +128,17 @@
 
                             <div class="header-right-column d-flex align-items-center">
                                 <div class="header-right-btn-area">
-                                    @guest
-                                        <a href="{{ url('login') }}" class="btn-1">Login Admin</a>
-                                    @else
-                                        <a href="{{ url('home') }}" class="btn-1">Admin Area</a>
-                                    @endguest
+                                    {{-- Language Switch for Sticky Header --}}
+                                    <div class="language-switch">
+                                        <input type="radio" name="lang-sticky" id="lang-id-sticky" {{ app()->getLocale() == 'id' ? 'checked' : '' }}>
+                                        <label for="lang-id-sticky">ID</label>
+
+                                        <input type="radio" name="lang-sticky" id="lang-en-sticky" {{ app()->getLocale() == 'en' ? 'checked' : '' }}>
+                                        <label for="lang-en-sticky">EN</label>
+
+                                        <span class="switch-highlight"></span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -149,6 +155,18 @@
                 <nav class="menu-box">
                     <div class="nav-logo"><a href="{{ url('/') }}"><img
                                 src="{{ asset('assets/images/logo.png') }}" alt="logo"></a></div>
+                    
+                    {{-- Language Switch for Mobile Menu --}}
+                    <div class="language-switch">
+                        <input type="radio" name="lang-mobile" id="lang-id-mobile" {{ app()->getLocale() == 'id' ? 'checked' : '' }}>
+                        <label for="lang-id-mobile">ID</label>
+
+                        <input type="radio" name="lang-mobile" id="lang-en-mobile" {{ app()->getLocale() == 'en' ? 'checked' : '' }}>
+                        <label for="lang-en-mobile">EN</label>
+
+                        <span class="switch-highlight"></span>
+                    </div>
+                    
                     <div class="menu-outer">
                         <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
                     </div>
