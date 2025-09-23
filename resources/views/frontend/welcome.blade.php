@@ -43,7 +43,7 @@
 
 
 
-    <!-- about page -->
+<!-- service & practise area page -->
 <section class="about-page">
     <div class="container">
         <div class="row">
@@ -113,6 +113,64 @@
         </div>
     </div>
 </section>
+
+<!-- Stats Section -->
+<section class="stats-section py-5" style="background: var(--primary-color); color: #fff;">
+    <div class="container text-center">
+
+        <!-- Section Title -->
+        <div class="mb-5">
+            <h2>{{ $homeStat->title_id ?? $homeStat->title_en }}</h2>
+            <p>{{ $homeStat->description_id ?? $homeStat->description_en }}</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="row justify-content-center">
+            @foreach($stats as $stat)
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="stat-item">
+                        @if($stat->image)
+                            <img src="{{ $stat->image }}" alt="{{ $stat->label_id }}" class="mb-3" style="width:50px; height:50px; object-fit:contain;">
+                        @endif
+                        <h3 class="mb-1">{{ $stat->value }}</h3>
+                        <p>{{ $stat->label_id ?? $stat->label_en }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section py-5">
+    <div class="container text-center">
+
+        <!-- Section Title -->
+        <div class="mb-5">
+            <h2>{{ $homeTeam->title_id ?? $homeTeam->title_en }}</h2>
+        </div>
+
+        <!-- Team Grid -->
+        <div class="row justify-content-center">
+            @foreach($teams as $team)
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="{{ $team->image }}" alt="{{ $team->name }}">
+                            <div class="team-overlay">
+                                <h5>{{ $team->name }}</h5>
+                                <p>{{ $team->email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+    </div>
+</section>
+
 
 
 

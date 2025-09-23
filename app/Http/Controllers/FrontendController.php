@@ -24,13 +24,15 @@ class FrontendController extends Controller
             ->orderBy('queue')
             ->get();
         $homes = Home::all();
-        $stats = Stat::all();
+        $stats = Stat::where('status', 1)->get();
         $teams = Team::all();
         $news = News::latest('published_at')->get();
         $services = Service::where('status', 'active')->take(10)->get();
         $practiceAreas = PracticeArea::where('status', 'active')->take(10)->get();
 
         $homeServiceAndPracticeAreas = Home::find('68ad9be0-c220-49df-b2a3-3d431023d512');
+        $homeStat = Home::find('ec8cf173-5d8a-4c7a-8323-5e08eefcbd78');
+        $homeTeam = Home::find('8b5c8d2a-be27-43c1-a9ac-54fbdb044a98');
         return view('frontend.welcome', compact(
             'website',
             'sliders',
@@ -40,7 +42,9 @@ class FrontendController extends Controller
             'news',
             'services',
             'practiceAreas',
-            'homeServiceAndPracticeAreas'
+            'homeServiceAndPracticeAreas',
+            'homeStat',
+            'homeTeam'
         ));
     }
 
