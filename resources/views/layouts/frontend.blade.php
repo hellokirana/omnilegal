@@ -76,11 +76,11 @@
                                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                         <ul class="navigation">
                                             <li><a href="{{ url('/') }}">Home</a></li>
-                                            <li><a href="{{ url('/media') }}">Media & News</a></li>
-                                            <li><a href="{{ url('/our_member') }}">Our Members</a></li>
-                                            <li><a href="{{ url('/about') }}">About</a></li>
-                                            <li><a href="{{ url('/contact') }}">Contact Us</a></li>
-
+                                            <li><a href="{{ url('/media') }}">Services & Practices</a></li>
+                                            <li><a href="{{ url('/our_member') }}">About</a></li>
+                                            <li><a href="{{ url('/about') }}">News</a></li>
+                                            <li><a href="{{ url('/contact') }}">Career</a></li>
+                                            <li><a href="{{ url('/contact') }}">Contact</a></li>
                                         </ul>
                                     </div>
                                 </nav>

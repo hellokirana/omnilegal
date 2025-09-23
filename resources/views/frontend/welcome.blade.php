@@ -147,7 +147,7 @@
     <div class="container text-center">
 
         <!-- Section Title -->
-        <div class="mb-5">
+        <div class="text-primary">
             <h2>{{ $homeTeam->title_id ?? $homeTeam->title_en }}</h2>
         </div>
 
@@ -175,42 +175,49 @@
 
 
 
-    <!-- featured -->
-    <section class="featured">
-        <div class="container">
-            <div class="common-title">
-                <h6>SHOWING</h6>
-                <h3>Recent Media & News</h3>
-            </div>
-            <div class="row g-4">
-                @forelse($news as $media)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="featured-single">
-                            <div class="featured-single-image">
-                                <a href="{{ url('media/' . $media->slug) }}">
-                                    <div style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px;">
-                                        <img src="{{ $media->image_url }}" alt="{{ $media->title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="featured-single-wishlist">
-                                <h6>{{ @$media->kategori->title}}</h6>
-                            </div>
-                            <div class="featured-single-content">
+    <!-- News Section -->
+<section class="news-section py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary">
+                        {{ $homeNews->title_id ?? $homeNews->title_en }}
+                    </h2>
+            <a href="{{ url('/news') }}" class="text-primary">See more >></a>
+        </div>
 
-                                <a href="{{ route('media.detail', $media->slug) }}">{{ $media->title }}</a>
-                                <div class="featured-single-info">
-                                    <a href="{{ route('media.detail', $media->slug) }}">Lihat selengkapnya</a>
-                                </div>
-                            </div>
+        <div class="row">
+            @foreach($news->take(5) as $item)
+                <div class="col-md-6 mb-4">
+                    <div class="news-card d-flex">
+                        <!-- Image with gradient overlay -->
+                        <div class="news-image">
+                            <img src="{{ $item->image }}" alt="{{ $item->title_id }}">
+                            <div class="gradient-overlay"></div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="news-content">
+                            <small class="news-meta">
+                                {{ $item->category_id }} | {{ $item->published_at->format('M d, Y') }}
+                            </small>
+                            <h5 class="news-title">
+                                {{ Str::limit($item->title_id ?? $item->title_en, 60) }}
+                            </h5>
+                            <p class="news-excerpt">
+                                {{ Str::limit($item->content_id ?? $item->content_en, 100) }}
+                            </p>
+                            <a href="{{ url('/news/'.$item->slug_id) }}" class="read-more">
+                                Read Article >>
+                            </a>
                         </div>
                     </div>
-                @empty
-                @endforelse
-            </div>
+                </div>
+            @endforeach
         </div>
-    </section>
-    <!-- featured -->  
+
+    </div>
+</section>
+
 
 @endsection
 @push('scripts')
