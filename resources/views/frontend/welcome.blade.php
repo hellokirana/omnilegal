@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- banner-section -->
-    <section class="banner-section-one ">
+    {{-- <section class="banner-section-one ">
         <div class="bg-layer" style="background-image: url({{ asset('assets/images/banner/banner-1-bg.jpg') }});">
         </div>
         <div class="container">
@@ -15,53 +15,107 @@
                                     <img src="{{ $slider->image_url }}" class="w-100">
                                 </a>
                             </div>
-
                         @empty
                         @endforelse
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+    <section class="banner-section">
+    <div class="swiper-container">
+        <div class="swiper single-item-carousel">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://picsum.photos/1920/1080?random=1" alt="Banner 1">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://picsum.photos/1920/1080?random=2" alt="Banner 2">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://picsum.photos/1920/1080?random=3" alt="Banner 3">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
     <!-- about page -->
-    <section class="about-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="about-page-left">
-                        <div class="pink-shape"></div>
-                        <div class="about-page-left-image">
-                            <img src="{{ asset('assets/images/resource/rotokemas.png') }}" alt="image">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="rewards-left-container">
-                        <div class="rewards-left-container-inner">
-                            <div class="common-title mb_30">
-                                <h6><i class="fa-solid fa-angles-right"></i> SHOWING </h6>
-                                <h3>About Rotokemas Indonesia</h3>
-                                <p style="text-align: justify;">The Packaging Industry Association - Rotokemas is an organization established to support the development of the packaging industry in Indonesia, focusing on innovation, standardization, and collaboration among industry players. Rotokemas has served as a platform for packaging companies to share knowledge, enhance production quality, and expand business networks.</p>
-                            </div>
-                            {{-- <div class="rewards-left-list">
-                                <ul>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Mitra Profesional & Berpengalaman</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Akses Gratis ke Ribuan Peluang Kerja</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Dukung Pertumbuhan Bisnis & Basis Klien</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Penghasilan Tambahan dengan Jadwal Fleksibel</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Mitra Profesional & Berpengalama</li>
-                                </ul>
-                            </div> --}}
-                            <div class="reward-btn">
-                                <a href="{{ url('/tentang') }}" class="btn-1">See More <i class="icon-arrow-1"></i></a>
-                            </div>
+<section class="about-page">
+    <div class="container">
+        <div class="row">
+            
+            <!-- Left Side -->
+            <div class="col-lg-5">
+                <div class="about-left">
+                    <h2 class="text-primary">
+                        {{ $homeServiceAndPracticeAreas->title_id ?? $homeServiceAndPracticeAreas->title_en }}
+                    </h2>
+                    <p style="text-align: justify;">
+                        {{ $homeServiceAndPracticeAreas->description_id ?? $homeServiceAndPracticeAreas->description_en }}
+                    </p>
+
+                    <!-- Switch Services/Practice -->
+                    <div class="service-practice-switch mt-3">
+                        <div class="sp-switch">
+                            <input type="radio" id="switch-services" name="switch-tab" checked>
+                            <label for="switch-services" onclick="showTab('services')">Services</label>
+
+                            <input type="radio" id="switch-practice" name="switch-tab">
+                            <label for="switch-practice" onclick="showTab('practice')">Practice Areas</label>
+
+                            <span class="sp-switch-highlight"></span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Right Side -->
+            <div class="col-lg-7">
+                <!-- Services -->
+                <div id="services" class="tab-content">
+                    <div class="row g-4">
+                        @foreach($services as $service)
+                            <div class="col-6 col-md-3 text-center">
+                                <div class="service-item">
+                                    <img src="{{ $service->image }}" alt="{{ $service->title_id }}" class="img-fluid mb-2">
+                                    <h6>{{ $service->title_id ?? $service->title_en }}</h6>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ url('/services') }}" class="btn-1">See All <i class="icon-arrow-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Practice Areas -->
+                <div id="practice" class="tab-content" style="display: none;">
+                    <div class="row g-4">
+                        @foreach($practiceAreas as $area)
+                            <div class="col-6 col-md-3 text-center">
+                                <div class="practice-item">
+                                    <img src="{{ $area->image }}" alt="{{ $area->title_id }}" class="img-fluid mb-2">
+                                    <h6>{{ $area->title_id ?? $area->title_en }}</h6>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ url('/practice-areas') }}" class="btn-1">See All <i class="icon-arrow-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
+
+
+
 
     <!-- featured -->
     <section class="featured">
@@ -122,6 +176,12 @@
             1024: { slidesPerView: 6 }
         }
     });
+    function showTab(tab) {
+        document.getElementById('services').style.display = (tab === 'services') ? 'block' : 'none';
+        document.getElementById('practice').style.display = (tab === 'practice') ? 'block' : 'none';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => showTab('services'));
 </script>
 @endpush
 

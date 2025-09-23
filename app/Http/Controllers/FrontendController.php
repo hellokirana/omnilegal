@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Website;
-use App\Models\Slider;
 use App\Models\Home;
+use App\Models\News;
 use App\Models\Stat;
 use App\Models\Team;
-use App\Models\News;
+use App\Models\Slider;
+use App\Models\Service;
+use App\Models\Website;
+use App\Models\PracticeArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -25,13 +27,20 @@ class FrontendController extends Controller
         $stats = Stat::all();
         $teams = Team::all();
         $news = News::latest('published_at')->get();
+        $services = Service::where('status', 'active')->take(10)->get();
+        $practiceAreas = PracticeArea::where('status', 'active')->take(10)->get();
+
+        $homeServiceAndPracticeAreas = Home::find('68ad9be0-c220-49df-b2a3-3d431023d512');
         return view('frontend.welcome', compact(
             'website',
             'sliders',
             'homes',
             'stats',
             'teams',
-            'news'
+            'news',
+            'services',
+            'practiceAreas',
+            'homeServiceAndPracticeAreas'
         ));
     }
 
