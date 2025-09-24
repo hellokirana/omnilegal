@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form method="POST" action="{{ route('slider.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.slider.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <!-- Kolom kiri -->

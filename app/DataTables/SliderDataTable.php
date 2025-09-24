@@ -26,8 +26,8 @@ class SliderDataTable extends DataTable
                 return $model->status_text;
             })
             ->addColumn('action', function ($row) {
-                $button = '<a href="' . route('slider.edit', $row->id) . '" class="btn btn-warning btn-sm mx-1" data-bs-toggle="tooltip" title="Edit"><i class="ri-file-edit-line"></i></a>';
-                $button .= '<a href="#" data-url_href="' . route('slider.destroy', $row->id) . '" class="btn btn-danger btn-sm mx-1 delete-post" data-bs-toggle="tooltip" title="Delete" data-csrf="' . csrf_token() . '"><i class="ri-delete-bin-2-line"></i></a>';
+                $button = '<a href="' . route('admin.slider.edit', $row->id) . '" class="btn btn-warning btn-sm mx-1" data-bs-toggle="tooltip" title="Edit"><i class="ri-file-edit-line"></i></a>';
+                $button .= '<a href="#" data-url_href="' . route('admin.slider.destroy', $row->id) . '" class="btn btn-danger btn-sm mx-1 delete-post" data-bs-toggle="tooltip" title="Delete" data-csrf="' . csrf_token() . '"><i class="ri-delete-bin-2-line"></i></a>';
                 return $button;
             })
             ->rawColumns(['image', 'action']);

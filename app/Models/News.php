@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class News extends Model
 {
+    use HasFactory, HasUuids;
     protected $table = 'news';
-    public $incrementing = false;
-    protected $keyType = 'string'; // untuk UUID
-
+    public $timestamps = true;
     protected $fillable = [
         'category_id',
         'title_id',
@@ -26,10 +27,8 @@ class News extends Model
         'document_id',
         'document_en',
         'status',
-        'published_at',
+        'created_at'
     ];
-
-    protected $dates = ['published_at'];
 
     protected $appends = [
         'image_url',

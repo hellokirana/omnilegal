@@ -4,9 +4,8 @@
     <div class="container">
         <div class="card">
             <div class="card-header d-md-flex justify-content-between text-capitalize">
-                Manage slider
-                <a href="{{ route('admin.slider.create') }}" class="btn btn-primary">Add New</a>
-   
+                Manage News
+                <a href="{{ route('admin.news.create') }}" class="btn btn-primary">Add New</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

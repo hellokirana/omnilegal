@@ -25,7 +25,6 @@ return new class extends Migration {
             $table->string('document_id')->nullable();
             $table->string('document_en')->nullable();
             $table->string('status')->nullable();
-            $table->date('published_at')->nullable();
             $table->timestamps();
         });
     }

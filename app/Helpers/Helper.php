@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\Kategori;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Kategori;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
@@ -203,11 +204,16 @@ if (!function_exists('terbilang')) {
 }
 
 
-
-if (!function_exists('kategori_all')) {
-    function kategori_all()
+if (!function_exists('category_all')) {
+    function category_all()
     {
-        $data_kategori = Kategori::orderBy('title')->pluck('title', 'id')->toArray();
-        return $data_kategori;
+        return Category::orderBy('title_id')
+            ->get()
+            ->mapWithKeys(function ($cat) {
+                return [
+                    $cat->id => $cat->title_id . ' / ' . $cat->title_en
+                ];
+            })
+            ->toArray();
     }
 }

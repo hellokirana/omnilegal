@@ -3,14 +3,16 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Data\NewsController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Data\AgendaController;
+use App\Http\Controllers\Admin\ContentController;
+
 use App\Http\Controllers\Data\MemberController;
 use App\Http\Controllers\Data\WorkerController;
+
 use App\Http\Controllers\AgendaMemberController;
-use App\Http\Controllers\Admin\ContentController;
+
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Data\AgendaParticipantController;
 
@@ -43,20 +45,6 @@ Route::get('/email/verified-success', function () {
     return view('auth.verified-success');
 })->name('verification.success');
 
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('news')->name('news.')->group(function () {
-        Route::get('/', [NewsController::class, 'index'])->name('index');
-        Route::get('/create', [NewsController::class, 'create'])->name('create');
-        Route::post('/', [NewsController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [NewsController::class, 'update'])->name('update');
-        Route::delete('/{id}', [NewsController::class, 'destroy'])->name('destroy');
-
-
-    });
-    Route::get('data/news/{slug}', [App\Http\Controllers\Data\NewsController::class, 'show'])->name('news.show');
-});
-
 Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
@@ -71,7 +59,15 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
     Route::put('/stat/update/{id}', [StatController::class, 'updateStat'])->name('stats.update');
     Route::delete('/stat/delete/{id}', [StatController::class, 'deleteStat'])->name('stats.delete');
 
-    Route::resource('/slider', SliderController::class);
+
+
+    Route::prefix('admin')
+        ->name('admin.')
+        ->middleware('role:superadmin')
+        ->group(function () {
+            Route::resource('news', NewsController::class);
+            Route::resource('slider', SliderController::class);
+        });
 
     Route::get('/profil', [App\Http\Controllers\HomeController::class, 'profil'])->name('profil');
     Route::post('/update_profil', [App\Http\Controllers\HomeController::class, 'update_profil'])->name('update_profil');
@@ -81,7 +77,6 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
     Route::resource('/data/kategori', App\Http\Controllers\Data\KategoriController::class)->middleware('role:superadmin');
     Route::resource('/data/bank', App\Http\Controllers\Data\BankController::class)->middleware('role:superadmin');
     Route::resource('/data/testimoni', App\Http\Controllers\Data\TestimoniController::class)->middleware('role:superadmin');
-    Route::resource('/data/media', App\Http\Controllers\Data\MediaController::class)->middleware('role:superadmin');
     Route::put('/data/worker/{id}', [WorkerController::class, 'update'])->name('worker.update');
     Route::put('/data/member/{id}', [MemberController::class, 'update'])->name('member.update');
     Route::get('/data/kontak', [App\Http\Controllers\HomeController::class, 'kontak']);

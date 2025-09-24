@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header d-md-flex justify-content-between text-capitalize">
                 Manage slider
-                <a href="{{ route('slider.create') }}" class="btn btn-primary">Add New</a>
+                <a href="{{ route('admin.slider.create') }}" class="btn btn-primary">Add New</a>
    
             </div>
             <div class="card-body">

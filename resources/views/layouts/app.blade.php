@@ -78,14 +78,14 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
                                         <a class="dropdown-item" href="{{ route('content.index') }}">Text Content</a>
-                                        <a class="dropdown-item" href="{{ url('slider') }}">Slider</a>
+                                        <a class="dropdown-item" href="{{ url('admin/slider') }}">Slider</a>
                                         <a class="dropdown-item" href="{{ route('stats.index') }}">Stat</a>
 
                                     </div>
                                 </li>
                             @hasanyrole('superadmin|member')
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('news') }}">news</a>
+                                    <a class="nav-link" href="{{ url('admin/news') }}">news</a>
                                 </li>
                             @endhasanyrole
                             
