@@ -15,6 +15,7 @@ use App\Http\Controllers\AgendaMemberController;
 
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Admin\PracticeAreaController;
@@ -74,6 +75,8 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
             Route::resource('service', ServiceController::class);
             Route::resource('practice-area', PracticeAreaController::class);
             Route::resource('team', TeamController::class);
+            Route::resource('website', WebsiteController::class);
+
             Route::resource('slider', SliderController::class);
         });
 

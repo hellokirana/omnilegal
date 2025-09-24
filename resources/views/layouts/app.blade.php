@@ -109,6 +109,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('admin/team') }}">Team</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('admin/website') }}">Information</a>
+                                </li>
 
 
                             @hasanyrole('superadmin')
@@ -116,42 +119,6 @@
                                     <a class="nav-link" href="{{ url('data/kontak') }}">Pesan Masukan</a>
                                 </li>
 
-                                <li class="nav-item dropdown">
-                                    <a id="layanan_menu" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Media
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
-                                        <a class="dropdown-item" href="{{ url('data/media') }}">Media Publik</a>
-                                        <a class="dropdown-item" href="{{ url('data/kategori') }}">kategori Media</a>
-
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a id="layanan_menu" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        User
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
-                                        <a class="dropdown-item" href="{{ url('data/member') }}">member</a>
-                                        <a class="dropdown-item" href="{{ route('pending-members.index') }}">Pending Member</a>
-                                        <a class="dropdown-item" href="{{ url('data/admin') }}">admin</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a id="konten_menu" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Tampilan
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="konten_menu">
-                                        <a class="dropdown-item" href="{{ url('data/slider') }}">Slide Utama</a>
-                                        <a class="dropdown-item" href="{{ url('data/testimoni') }}">Member Logo</a>
-                                        {{-- <a class="dropdown-item" href="{{ url('data/bank') }}">bank</a> --}}
-                                    </div>
-                                </li>
                             @endhasanyrole
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
