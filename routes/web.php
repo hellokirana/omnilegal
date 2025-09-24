@@ -13,6 +13,7 @@ use App\Http\Controllers\AgendaMemberController;
 
 use App\Http\Controllers\Admin\ContentController;
 
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Data\AgendaParticipantController;
@@ -68,6 +69,7 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
         ->group(function () {
             Route::resource('news', NewsController::class);
             Route::resource('category', CategoryController::class);
+            Route::resource('service', ServiceController::class);
             Route::resource('slider', SliderController::class);
         });
 

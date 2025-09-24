@@ -94,6 +94,18 @@
 
                                     </div>
                                 </li>
+
+                                <li class="nav-item dropdown">
+                                    <a id="layanan_menu" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Service & Practice Areas
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
+                                        <a class="dropdown-item" href="{{ url('admin/service') }}">Service</a>
+                                        <a class="dropdown-item" href="{{ url('admin/practice_area') }}">Practice Area</a>
+
+                                    </div>
+                                </li>
                             
                             {{-- @hasanyrole('superadmin|worker')
                                 <li class="nav-item">
