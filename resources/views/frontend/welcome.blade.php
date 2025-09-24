@@ -198,7 +198,7 @@
                         <!-- Content -->
                         <div class="news-content">
                             <small class="news-meta">
-                                {{ $item->category_id }} | {{ $item->published_at->format('M d, Y') }}
+                                {{ $item->category_id }} | {{ $item->created_at->format('M d, Y') }}
                             </small>
                             <h5 class="news-title">
                                 {{ Str::limit($item->title_id ?? $item->title_en, 60) }}

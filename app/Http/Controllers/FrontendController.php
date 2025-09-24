@@ -26,7 +26,7 @@ class FrontendController extends Controller
         $homes = Home::all();
         $stats = Stat::where('status', 1)->get();
         $teams = Team::all();
-        $news = News::latest('published_at')->get();
+        $news = News::latest('created_at')->get();
         $services = Service::where('status', 'active')->take(10)->get();
         $practiceAreas = PracticeArea::where('status', 'active')->take(10)->get();
 

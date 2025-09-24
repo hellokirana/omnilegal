@@ -3,16 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Data\MemberController;
 
+use App\Http\Controllers\Data\MemberController;
 use App\Http\Controllers\Data\WorkerController;
+
 use App\Http\Controllers\Admin\SliderController;
 
 use App\Http\Controllers\AgendaMemberController;
-
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\WebsiteController;
@@ -76,7 +77,7 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
             Route::resource('practice-area', PracticeAreaController::class);
             Route::resource('team', TeamController::class);
             Route::resource('website', WebsiteController::class);
-
+            Route::resource('inbox', ContactController::class);
             Route::resource('slider', SliderController::class);
         });
 

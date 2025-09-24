@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\PracticeArea;
 use Illuminate\Support\Str;
+use App\Models\PracticeArea;
 use Illuminate\Http\Request;
+use App\DataTables\ContactDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class PracticeAreaController extends Controller
 {
-    public function index(\App\DataTables\PracticeAreaDataTable $dataTable)
+    public function index(ContactDataTable $dataTable)
     {
-        // Render view practice-area index
-        return $dataTable->render('admin.practice-area.index');
+        return $dataTable->render('admin.inbox.index');
     }
 
     public function create()

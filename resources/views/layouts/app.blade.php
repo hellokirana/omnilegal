@@ -113,10 +113,8 @@
                                     <a class="nav-link" href="{{ url('admin/website') }}">Information</a>
                                 </li>
 
-
-                            @hasanyrole('superadmin')
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('data/kontak') }}">Pesan Masukan</a>
+                                    <a class="nav-link" href="{{ url('admin/inbox') }}">Inbox</a>
                                 </li>
 
                             @endhasanyrole
@@ -140,7 +138,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        
                     </ul>
                 </div>
             </div>
