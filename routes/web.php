@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DisclaimerController;
+use App\Http\Controllers\Admin\DescriptionController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Admin\PracticeAreaController;
 use App\Http\Controllers\Data\AgendaParticipantController;
@@ -81,6 +82,7 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
             Route::resource('inbox', ContactController::class);
             Route::resource('slider', SliderController::class);
             Route::resource('disclaimer', DisclaimerController::class);
+            Route::resource('description', DescriptionController::class);
         });
 
     Route::get('/profil', [App\Http\Controllers\HomeController::class, 'profil'])->name('profil');

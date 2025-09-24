@@ -80,7 +80,7 @@
                                         <a class="dropdown-item" href="{{ route('content.index') }}">Text Content</a>
                                         <a class="dropdown-item" href="{{ url('admin/slider') }}">Slider</a>
                                         <a class="dropdown-item" href="{{ route('stats.index') }}">Stat</a>
-
+                                        <a class="dropdown-item" href="{{ url('admin/description') }}">Description</a>
                                     </div>
                                 </li>
                             <li class="nav-item dropdown">
@@ -119,6 +119,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('admin/disclaimer') }}">Disclaimer</a>
                                 </li>
+                                
 
                             @endhasanyrole
                             <li class="nav-item dropdown">
