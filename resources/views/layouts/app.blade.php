@@ -83,11 +83,17 @@
 
                                     </div>
                                 </li>
-                            @hasanyrole('superadmin|member')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('admin/news') }}">news</a>
+                            <li class="nav-item dropdown">
+                                    <a id="layanan_menu" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        News
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
+                                        <a class="dropdown-item" href="{{ url('admin/news') }}">News List</a>
+                                        <a class="dropdown-item" href="{{ url('admin/category') }}">Category</a>
+
+                                    </div>
                                 </li>
-                            @endhasanyrole
                             
                             {{-- @hasanyrole('superadmin|worker')
                                 <li class="nav-item">

@@ -5,14 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StatController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\ContentController;
-
 use App\Http\Controllers\Data\MemberController;
 use App\Http\Controllers\Data\WorkerController;
 
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\AgendaMemberController;
 
+use App\Http\Controllers\Admin\ContentController;
+
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Data\AgendaParticipantController;
 
@@ -66,6 +67,7 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
         ->middleware('role:superadmin')
         ->group(function () {
             Route::resource('news', NewsController::class);
+            Route::resource('category', CategoryController::class);
             Route::resource('slider', SliderController::class);
         });
 
