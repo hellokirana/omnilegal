@@ -106,16 +106,9 @@
 
                                     </div>
                                 </li>
-                            
-                            {{-- @hasanyrole('superadmin|worker')
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('data/withdraw') }}">withdraw</a>
+                                    <a class="nav-link" href="{{ url('admin/team') }}">Team</a>
                                 </li>
-                            @endhasanyrole --}}
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{ url('data/order') }}">order</a>
-                            </li> --}}
-
 
 
                             @hasanyrole('superadmin')
