@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\StatController;
-use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Data\NewsController;
+use App\Http\Controllers\Admin\StatController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Data\AgendaController;
 use App\Http\Controllers\Data\MemberController;
 use App\Http\Controllers\Data\WorkerController;
 use App\Http\Controllers\AgendaMemberController;
+use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Data\AgendaParticipantController;
 
@@ -70,11 +71,13 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
     Route::put('/stat/update/{id}', [StatController::class, 'updateStat'])->name('stats.update');
     Route::delete('/stat/delete/{id}', [StatController::class, 'deleteStat'])->name('stats.delete');
 
+    Route::resource('/slider', SliderController::class);
+
     Route::get('/profil', [App\Http\Controllers\HomeController::class, 'profil'])->name('profil');
     Route::post('/update_profil', [App\Http\Controllers\HomeController::class, 'update_profil'])->name('update_profil');
     Route::get('/media/{slug}', [App\Http\Controllers\HomeController::class, 'media_detail'])->name('media.detail');
     Route::post('/send_order', [App\Http\Controllers\HomeController::class, 'send_order'])->name('send_order');
-    Route::resource('/data/slider', App\Http\Controllers\Data\SliderController::class)->middleware('role:superadmin');
+
     Route::resource('/data/kategori', App\Http\Controllers\Data\KategoriController::class)->middleware('role:superadmin');
     Route::resource('/data/bank', App\Http\Controllers\Data\BankController::class)->middleware('role:superadmin');
     Route::resource('/data/testimoni', App\Http\Controllers\Data\TestimoniController::class)->middleware('role:superadmin');

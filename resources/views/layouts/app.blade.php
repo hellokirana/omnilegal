@@ -78,7 +78,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
                                         <a class="dropdown-item" href="{{ route('content.index') }}">Text Content</a>
-                                        <a class="dropdown-item" href="{{ url('data/kategori') }}">Slider</a>
+                                        <a class="dropdown-item" href="{{ url('slider') }}">Slider</a>
                                         <a class="dropdown-item" href="{{ route('stats.index') }}">Stat</a>
 
                                     </div>

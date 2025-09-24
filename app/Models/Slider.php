@@ -59,8 +59,9 @@ class Slider extends Model
     {
         return $this->image
             ? asset('storage/slider/' . $this->image)
-            : 'https://loremflickr.com/1280/720?random=' . $this->queue;
+            : asset('assets/images/default-slider.jpg'); // default image
     }
+
 
     public function getStatusTextAttribute()
     {
