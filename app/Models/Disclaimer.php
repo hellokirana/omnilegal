@@ -13,7 +13,8 @@ class Disclaimer extends Model
     protected $fillable = [
         'description_id',
         'description_en',
-        'last_updated'
+        'created_at',
+        'updated_at'
     ];
 
     protected static function boot()

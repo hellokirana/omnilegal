@@ -116,6 +116,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('admin/inbox') }}">Inbox</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('admin/disclaimer') }}">Disclaimer</a>
+                                </li>
 
                             @endhasanyrole
                             <li class="nav-item dropdown">
