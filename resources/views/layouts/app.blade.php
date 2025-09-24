@@ -102,7 +102,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layanan_menu">
                                         <a class="dropdown-item" href="{{ url('admin/service') }}">Service</a>
-                                        <a class="dropdown-item" href="{{ url('admin/practice_area') }}">Practice Area</a>
+                                        <a class="dropdown-item" href="{{ url('admin/practice-area') }}">Practice Area</a>
 
                                     </div>
                                 </li>

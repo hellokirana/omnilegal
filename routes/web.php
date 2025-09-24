@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Admin\PracticeAreaController;
 use App\Http\Controllers\Data\AgendaParticipantController;
 
 Route::get('lang/{locale}', function ($locale) {
@@ -70,6 +71,7 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
             Route::resource('news', NewsController::class);
             Route::resource('category', CategoryController::class);
             Route::resource('service', ServiceController::class);
+            Route::resource('practice-area', PracticeAreaController::class);
             Route::resource('slider', SliderController::class);
         });
 
