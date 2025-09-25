@@ -216,4 +216,10 @@ if (!function_exists('category_all')) {
             })
             ->toArray();
     }
+    if (!function_exists('locale_route')) {
+        function locale_route($name, $parameters = [], $absolute = true)
+        {
+            return route($name, array_merge(['locale' => app()->getLocale()], $parameters), $absolute);
+        }
+    }
 }

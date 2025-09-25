@@ -19,7 +19,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $website = Website::all();
+        $website = Website::first();
         $sliders = Slider::where('status', 1)
             ->orderBy('queue')
             ->get();

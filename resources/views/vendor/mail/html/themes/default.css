@@ -3,8 +3,9 @@
 body,
 body *:not(html):not(style):not(br):not(tr):not(code) {
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol";
     position: relative;
 }
 
@@ -169,14 +170,17 @@ img {
     width: 570px;
 }
 
+.footer h3,
 .footer p {
-    color: #b0adc5;
-    font-size: 12px;
-    text-align: center;
+    white-space: normal; /* biar text bisa turun */
+    word-wrap: break-word; /* pecah kata panjang */
+    line-height: 1.4; /* jarak antar baris */
 }
-
-.footer a {
-    color: #b0adc5;
+footer a {
+    color: #000;
+    text-decoration: none;
+}
+footer a:hover {
     text-decoration: underline;
 }
 

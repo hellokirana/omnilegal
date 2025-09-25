@@ -22,5 +22,16 @@ class Contact extends Model
             }
         });
     }
+    protected function getLocalized($field)
+    {
+        $locale = app()->getLocale();
+        $column = "{$field}_{$locale}";
+
+        if (in_array($locale, ['id', 'en']) && !empty($this->{$column})) {
+            return $this->{$column};
+        }
+
+        return $this->{$field . '_en'};
+    }
 }
 

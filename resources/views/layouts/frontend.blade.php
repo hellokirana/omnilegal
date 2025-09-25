@@ -15,6 +15,8 @@
     <!-- Favicon -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-XyGZ1AvwLhkdME9YyUw5o2qvWZt1Qo8h1FZZbGQUFdA+cS9bYOzCXh3n4gxQ3VnTZhKLG1rKcsEtTXCvC8Ybnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -76,10 +78,10 @@
                                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                         <ul class="navigation">
                                             <li><a href="{{ url('/') }}">{{ __('frontend.home') }}</a></li>
-                                            <li><a href="{{ url('/media') }}">{{ __('frontend.services') }}</a></li>
-                                            <li><a href="{{ url('/our_member') }}">{{ __('frontend.about') }}</a></li>
-                                            <li><a href="{{ url('/about') }}">{{ __('frontend.news') }}</a></li>
-                                            <li><a href="{{ url('/contact') }}">{{ __('frontend.career') }}</a></li>
+                                            <li><a href="{{ url('/services-and-practice-areas') }}">{{ __('frontend.services') }}</a></li>
+                                            <li><a href="{{ url('/about') }}">{{ __('frontend.about') }}</a></li>
+                                            <li><a href="{{ url('/news') }}">{{ __('frontend.news') }}</a></li>
+                                            <li><a href="{{ url('/career') }}">{{ __('frontend.career') }}</a></li>
                                             <li><a href="{{ url('/contact') }}">{{ __('frontend.contact') }}</a></li>
                                         </ul>
                                     </div>
@@ -162,64 +164,89 @@
 
         @yield('content')
 
-        <!-- footer -->
-        <footer id="footer" class="main-footer footer-one">
-            <div class="container">
-                <div class="footer-top">
-                    <div class="footer-top-logo">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
-                    </div>
-                    {{-- <div class="social-media">
-                        <ul>
-                            <li><a href="#0"><i class="fa-brands fa-facebook-f"></i></a></li>
-                            <li><a href="#0"><i class="icon-twiter"></i></a></li>
-                            <li><a href="#0"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                            <li><a href="#0"><i class="fa-brands fa-instagram"></i></a></li>
-                        </ul>
-                    </div> --}}
-                </div>
-                <div class="footer-widget-container">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <div class="footer-widget about-widget">
-                                <div class="about-widget-inner">
-                                    <h6 class="footer-widget-title">About</h6>
-                                    <p class="text-justify">
-                                        The Packaging Industry Association - Rotokemas is an organization established to support the development of the packaging industry in Indonesia, focusing on innovation, standardization, and collaboration among industry players.
-                                    </p>
+        <!-- Footer -->
+<footer id="footer" class="main-footer py-5 border-top">
+    <div class="container">
+        <div class="row">
 
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-xl-4 col-lg-6 col-md-8">
-                            <div class="footer-widget newsletter-widget">
-                                <div class="newsletter-widget-inner">
-                                    <h6 class="footer-widget-title">Contact Us</h6>
-                                    <div class="footer-newsletter-info">
+            <!-- Left Section -->
+            <div class="col-lg-6 mb-4">
+                <h3 class="fw-bold text-primary">{{ __('frontend.footer1') }}<br>{{ __('frontend.footer2') }}</h3>
+                <p class="mt-3">{{ __('frontend.footer-caption') }}</p>
 
-                                        <div class="footer-contact-info">
-                                            <a href="https://maps.app.goo.gl/84TH16A5Q1TZs1c2A" target="_blank"><i class="fa-light fa-location-dot" ></i>Panin Tower, 15th Floor, Senayan City, Jalan Asia Afrika Lot. 19, Jakarta Pusat, Indonesia.</a>
-                                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rotokemas@gmail.com" target="_blank">
-                                                <i class="fa-light fa-envelope"></i> rotokemas.id@gmail.com
-                                              </a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Social Media -->
+                <div class="mt-3">
+                    @if($website && $website->instagram)
+                        <a href="{{ $website->instagram }}" target="_blank" class="me-2">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </a>
+                    @endif
+                    @if($website && $website->linkedin)
+                        <a href="{{ $website->linkedin }}" target="_blank" class="me-2">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </a>
+                    @endif
+                    @if($website && $website->facebook)
+                        <a href="{{ $website->facebook }}" target="_blank" class="me-2">
+                            <i class="fab fa-facebook fa-2x"></i>
+                        </a>
+                    @endif
+                    @if($website && $website->x)
+                        <a href="{{ $website->x }}" target="_blank" class="me-2">
+                            <i class="fab fa-x-twitter fa-2x"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    <div class="footer-copyright-content">
-                        <p> &copy; 2025 Rotokemas Indonesia | Alrights reserved
-                    </div>
-                </div>
+
+            <!-- Right Section -->
+            <div class="col-lg-6 mb-4">
+                <h4 class="fw-bold text-primary mb-3">{{ __('frontend.contact-us') }}</h4>
+                <p class="mb-0">
+    <i class="fas fa-paper-plane me-2 text-primary"></i>
+    <a href="{{ locale_route('frontend.contact') }}" class="text-dark text-decoration-none">
+        {{ __('frontend.send-message') }}
+    </a>
+</p>
+<p class="mb-2">
+    <i class="fas fa-phone me-2 text-primary"></i>
+    <a href="tel:{{ $website->phone }}" class="text-dark text-decoration-none">
+        {{ $website->phone ?? '-' }}
+    </a>
+</p>
+<p class="mb-4">
+    <i class="fas fa-envelope me-2 text-primary"></i>
+    <a href="mailto:{{ $website->email }}" class="text-dark text-decoration-none">
+        {{ $website->email }}
+    </a>
+</p>
+
+
+
+
+
+                
+
+
+                <h4 class="fw-bold text-primary mb-3">{{ __('frontend.visit-us') }}</h4>
+                <p>
+                    <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                    {{ $website->address }}
+                </p>
             </div>
-        </footer>
-        <!-- footer -->
+
+        </div>
+    </div>
+</footer>
+
+
+        <!-- Copyright -->
+        <div class="text-center border-top pt-3 mt-3">
+            <p class="mb-0">&copy; {{ date('Y') }} {{ $website->nama ?? 'Company' }} | All rights reserved</p>
+        </div>
+    </div>
+</footer>
+
 
     </div>
 
