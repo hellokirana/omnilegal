@@ -22,7 +22,7 @@ class TeamDataTable extends DataTable
             })
             ->editColumn('image', function ($model) {
                 return $model->image
-                    ? '<img src="' . asset('storage/team/' . $model->image) . '" width="50">'
+                    ? '<img src="' . $model->image_url . '" width="50">'
                     : '';
             })
             ->addColumn('action', function ($row) {

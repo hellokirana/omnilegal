@@ -34,7 +34,6 @@ class StatController extends Controller
 
         $validated['id'] = (string) Str::uuid();
 
-        // Upload image jika ada
         if ($request->hasFile('image')) {
             $filename = $request->file('image')->hashName();
             $request->file('image')->storeAs('stat', $filename, 'public');
@@ -64,8 +63,7 @@ class StatController extends Controller
         ]);
 
         $stat = Stat::findOrFail($id);
-
-        // Update image jika ada
+        
         if ($request->hasFile('image')) {
             if ($stat->image) {
                 Storage::disk('public')->delete('stat/' . $stat->image);

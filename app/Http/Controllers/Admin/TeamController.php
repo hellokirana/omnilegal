@@ -37,7 +37,9 @@ class TeamController extends Controller
         $validated['id'] = (string) Str::uuid();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('team', 'public');
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->storeAs('team', $filename, 'public');
+            $validated['image'] = $filename;
         }
 
         Team::create($validated);
@@ -70,9 +72,11 @@ class TeamController extends Controller
 
         if ($request->hasFile('image')) {
             if ($team->image) {
-                Storage::disk('public')->delete($team->image);
+                Storage::disk('public')->delete('team/' . $team->image);
             }
-            $validated['image'] = $request->file('image')->store('team', 'public');
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->storeAs('team', $filename, 'public');
+            $validated['image'] = $filename;
         }
 
         $team->update($validated);
@@ -91,7 +95,7 @@ class TeamController extends Controller
         $team = Team::findOrFail($id);
 
         if ($team->image) {
-            Storage::disk('public')->delete($team->image);
+            Storage::disk('public')->delete('team/' . $team->image);
         }
 
         $team->delete();

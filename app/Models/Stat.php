@@ -41,7 +41,7 @@ class Stat extends Model
     {
         return $this->image
             ? asset('storage/stat/' . $this->image)
-            : 'https://loremflickr.com/100/100/icon'; // default icon random
+            : 'https://loremflickr.com/100/100/icon';
     }
 
     public function getStatusTextAttribute()
