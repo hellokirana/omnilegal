@@ -8,4 +8,7 @@ return [
     'contact' => 'Contact',
     'services-btn' => 'Services',
     'practices-btn' => 'Practice Areas',
+    'see-all' => 'See All',
+    'see-more' => 'See More',
+    'read-article' => 'Read Article',
 ];

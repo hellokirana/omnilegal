@@ -35,20 +35,24 @@
             <div class="col-lg-5">
                 <div class="about-left">
                     <h2 class="text-primary">
-                        {{ $homeServiceAndPracticeAreas->title_id ?? $homeServiceAndPracticeAreas->title_en }}
+                        {{ $homeServiceAndPracticeAreas->title }}
                     </h2>
                     <p style="text-align: justify;">
-                        {{ $homeServiceAndPracticeAreas->description_id ?? $homeServiceAndPracticeAreas->description_en }}
+                        {{ $homeServiceAndPracticeAreas->description }}
                     </p>
 
                     <!-- Switch Services/Practice -->
                     <div class="service-practice-switch mt-3">
                         <div class="sp-switch">
                             <input type="radio" id="switch-services" name="switch-tab" checked>
-                            <label for="switch-services" onclick="showTab('services')">{{ __('frontend.services-btn') }}</label>
+                            <label for="switch-services" onclick="showTab('services')">
+                                {{ __('frontend.services-btn') }}
+                            </label>
 
                             <input type="radio" id="switch-practice" name="switch-tab">
-                            <label for="switch-practice" onclick="showTab('practice')">{{ __('frontend.practices-btn') }}</label>
+                            <label for="switch-practice" onclick="showTab('practice')">
+                                {{ __('frontend.practices-btn') }}
+                            </label>
 
                             <span class="sp-switch-highlight"></span>
                         </div>
@@ -64,14 +68,16 @@
                         @foreach($services as $service)
                             <div class="col-6 col-md-3 text-center">
                                 <div class="service-item">
-                                    <img src="{{ $service->image }}" alt="{{ $service->title_id }}" class="img-fluid mb-2">
-                                    <h6>{{ $service->title_id ?? $service->title_en }}</h6>
+                                    <img src="{{ $service->image }}" alt="{{ $service->title }}" class="img-fluid mb-2">
+                                    <h6>{{ $service->title }}</h6>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     <div class="text-center mt-4">
-                        <a href="{{ url('/services') }}" class="btn-1">See All <i class="icon-arrow-1"></i></a>
+                        <a href="{{ url('/services') }}" class="btn-1">
+                            {{ __('frontend.see-all') }} <i class="icon-arrow-1"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -81,14 +87,16 @@
                         @foreach($practiceAreas as $area)
                             <div class="col-6 col-md-3 text-center">
                                 <div class="practice-item">
-                                    <img src="{{ $area->image }}" alt="{{ $area->title_id }}" class="img-fluid mb-2">
-                                    <h6>{{ $area->title_id ?? $area->title_en }}</h6>
+                                    <img src="{{ $area->image }}" alt="{{ $area->title }}" class="img-fluid mb-2">
+                                    <h6>{{ $area->title }}</h6>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     <div class="text-center mt-4">
-                        <a href="{{ url('/practice-areas') }}" class="btn-1">See All <i class="icon-arrow-1"></i></a>
+                        <a href="{{ url('/practice-areas') }}" class="btn-1">
+                            {{ __('frontend.see-all') }} <i class="icon-arrow-1"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -97,33 +105,37 @@
     </div>
 </section>
 
+
 <!-- Stats Section -->
 <section class="stats-section py-5" style="background: var(--primary-color); color: #fff;">
     <div class="container text-center">
 
         <!-- Section Title -->
         <div class="mb-5">
-            <h2>{{ $homeStat->title_id ?? $homeStat->title_en }}</h2>
-            <p>{{ $homeStat->description_id ?? $homeStat->description_en }}</p>
+            <h2>{{ $homeStat->title }}</h2>
+            <p>{{ $homeStat->description }}</p>
         </div>
 
         <!-- Stats Grid -->
         <div class="row justify-content-center">
             @foreach($stats as $stat)
                 <div class="col-6 col-md-3 mb-4">
-                    <div class="stat-item">
+                    <div class="stat-item text-center">
                         @if($stat->image)
-                            <img src="{{ $stat->image }}" alt="{{ $stat->label_id }}" class="mb-3" style="width:50px; height:50px; object-fit:contain;">
+                            <img src="{{ $stat->image_url }}" alt="{{ $stat->label }}"
+                                class="mb-3" style="width:50px; height:50px; object-fit:contain;">
                         @endif
                         <h3 class="mb-1">{{ $stat->value }}</h3>
-                        <p>{{ $stat->label_id ?? $stat->label_en }}</p>
+                        <p>{{ $stat->label }}</p>
                     </div>
                 </div>
             @endforeach
         </div>
 
+
     </div>
 </section>
+
 
 <!-- Team Section -->
 <section class="team-section py-5">
@@ -131,7 +143,7 @@
 
         <!-- Section Title -->
         <div class="text-primary">
-            <h2>{{ $homeTeam->title_id ?? $homeTeam->title_en }}</h2>
+            <h2>{{ $homeTeam->title }}</h2>
         </div>
 
         <!-- Team Grid -->
@@ -140,7 +152,7 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                     <div class="team-card">
                         <div class="team-image">
-                            <img src="{{ $team->image }}" alt="{{ $team->name }}">
+                            <img src="{{ $team->image_url }}" alt="{{ $team->name }}" class="img-fluid">
                             <div class="team-overlay">
                                 <h5>{{ $team->name }}</h5>
                                 <p>{{ $team->email }}</p>
@@ -158,48 +170,50 @@
 
 
 
+
     <!-- News Section -->
 <section class="news-section py-5">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="text-primary">
-                        {{ $homeNews->title_id ?? $homeNews->title_en }}
-                    </h2>
-            <a href="{{ url('/news') }}" class="text-primary">See more >></a>
+            <h2 class="text-primary">{{ $homeNews->title }}</h2>
+            <a href="{{ url('/news') }}" class="text-primary">{{ __('frontend.see-more') }} >></a>
         </div>
 
-        <div class="row">
-            @foreach($news->take(5) as $item)
-                <div class="col-md-6 mb-4">
-                    <div class="news-card d-flex">
-                        <!-- Image with gradient overlay -->
-                        <div class="news-image">
-                            <img src="{{ $item->image }}" alt="{{ $item->title_id }}">
-                            <div class="gradient-overlay"></div>
-                        </div>
+        <!-- Swiper Carousel -->
+        <div class="swiper news-carousel">
+            <div class="swiper-wrapper">
+                @foreach($news->take(5) as $item)
+                    <div class="swiper-slide">
+                        <div class="news-card d-flex">
+                            <!-- Image -->
+                            <div class="news-image position-relative" style="flex: 1;">
+                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="img-fluid rounded">
+                                <div class="gradient-overlay"></div>
+                            </div>
+                            <!-- Content -->
+                            <div class="news-content ps-3" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <small class="news-meta text-muted mb-2">
+                                    {{ $item->category->name ?? '' }} | {{ $item->created_at->format('M d, Y') }}
+                                </small>
+                                <h3 class="news-title mb-2">
+                                    {{ Str::limit($item->title, 70) }}
+                                </h3>
 
-                        <!-- Content -->
-                        <div class="news-content">
-                            <small class="news-meta">
-                                {{ $item->category_id }} | {{ $item->created_at->format('M d, Y') }}
-                            </small>
-                            <h5 class="news-title">
-                                {{ Str::limit($item->title_id ?? $item->title_en, 60) }}
-                            </h5>
-                            <p class="news-excerpt">
-                                {{ Str::limit($item->content_id ?? $item->content_en, 100) }}
-                            </p>
-                            <a href="{{ url('/news/'.$item->slug_id) }}" class="read-more">
-                                Read Article >>
-                            </a>
+                                <p class="news-excerpt mb-2">
+                                    {!! Str::limit($item->content, 197) !!}
+                                </p>
+                                <a href="{{ url('/news/' . $item->slug) }}" class="read-more text-primary fw-bold">
+                                    {{ __('frontend.read-article') }} >>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-
     </div>
 </section>
+
 
 
 @endsection

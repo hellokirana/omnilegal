@@ -48,9 +48,10 @@ class NewsController extends Controller
 
         $validated['id'] = (string) Str::uuid();
 
-        // Upload image
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('news', 'public');
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->storeAs('news', $filename, 'public');
+            $validated['image'] = $filename;
         }
 
         // Upload documents
@@ -95,12 +96,13 @@ class NewsController extends Controller
             'created_at' => 'nullable|date', // tambahkan validasi created_at
         ]);
 
-        // Update image
         if ($request->hasFile('image')) {
             if ($news->image) {
-                Storage::disk('public')->delete($news->image);
+                Storage::disk('public')->delete('news/' . $news->image);
             }
-            $validated['image'] = $request->file('image')->store('news', 'public');
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->storeAs('news', $filename, 'public');
+            $validated['image'] = $filename;
         }
 
         // Update documents
@@ -137,7 +139,7 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         if ($news->image) {
-            Storage::disk('public')->delete($news->image);
+            Storage::disk('public')->delete('news/' . $news->image);
         }
         if ($news->document_id) {
             Storage::disk('public')->delete($news->document_id);

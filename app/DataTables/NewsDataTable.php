@@ -21,7 +21,9 @@ class NewsDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->editColumn('image', function ($model) {
-                return '<img src="' . $model->image_url . '" class="img-fluid" width="80">';
+                return $model->image
+                    ? '<img src="' . $model->image_url . '" width="50">'
+                    : '';
             })
             ->editColumn('status', function ($model) {
                 return $model->status_text;
