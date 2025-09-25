@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form method="POST" action="{{ route('admin.practice-area.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.practice-area.store') }}">
         @csrf
         <div class="row">
             {{-- LEFT SIDE --}}
@@ -13,10 +13,29 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            {{-- Image --}}
+                            {{-- Image Picker --}}
                             <div class="col-12 mb-3">
-                                <x-form.file label="Image" for="image" name="image" 
-                                    value="{{ old('image') }}" :error="$errors->first('image')" />
+                                <label for="image">Pilih Icon Practice Area</label>
+                                <select name="image" id="image" class="form-select" onchange="previewImage()">
+                                    <option value="">Pilih Icon</option>
+                                    @for ($i = 1; $i <= 48; $i++)
+                                        <option value="{{ $i }}.png"
+                                            {{ old('image') == $i.'.png' ? 'selected' : '' }}>
+                                            Icon {{ $i }}
+                                        </option>
+                                    @endfor
+                                </select>
+                                @if ($errors->first('image'))
+                                    <small class="text-danger">{{ $errors->first('image') }}</small>
+                                @endif
+
+                                {{-- Preview --}}
+                                <div class="mt-3 text-center">
+                                    <img id="preview-img" 
+                                        src="{{ old('image') ? asset('assets/images/service/'.old('image')) : '' }}" 
+                                        alt="Preview" 
+                                        style="max-height:100px; display: {{ old('image') ? 'block' : 'none' }}; margin:auto;">
+                                </div>
                             </div>
 
                             {{-- Title Indonesia --}}
@@ -80,3 +99,18 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function previewImage() {
+        const select = document.getElementById('image');
+        const preview = document.getElementById('preview-img');
+        if (select.value) {
+            preview.src = '/assets/images/service/' + select.value;
+            preview.style.display = 'block';
+        } else {
+            preview.style.display = 'none';
+        }
+    }
+</script>
+@endpush

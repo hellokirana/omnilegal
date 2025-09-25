@@ -33,6 +33,7 @@ Route::prefix('{locale}')
     ->where(['locale' => 'id|en'])
     ->group(function () {
         Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
+        Route::get('/services-and-practice-areas', [FrontendController::class, 'service'])->name('frontend.service');
         Route::get('/news', [FrontendController::class, 'news'])->name('frontend.news');
         Route::get('/news/{id}', [FrontendController::class, 'news-detail'])->name('frontend.news-detail');
         Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');

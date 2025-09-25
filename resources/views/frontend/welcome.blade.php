@@ -63,42 +63,63 @@
             <!-- Right Side -->
             <div class="col-lg-7">
                 <!-- Services -->
-                <div id="services" class="tab-content">
-                    <div class="row g-4">
-                        @foreach($services as $service)
-                            <div class="col-6 col-md-3 text-center">
-                                <div class="service-item">
-                                    <img src="{{ $service->image }}" alt="{{ $service->title }}" class="img-fluid mb-2">
-                                    <h6>{{ $service->title }}</h6>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="text-center mt-4">
-                        <a href="{{ url('/services') }}" class="btn-1">
-                            {{ __('frontend.see-all') }} <i class="icon-arrow-1"></i>
-                        </a>
-                    </div>
+<div id="services" class="tab-content">
+    <div class="row g-4">
+        @foreach($services as $service)
+            <div class="col-6 col-md-3 text-center">
+                <div class="service-item">
+                    @if($service->image)
+                        <img src="{{ asset('assets/images/service/' . $service->image) }}" 
+                             alt="{{ $service->{'title_'.app()->getLocale()} }}" 
+                             class="img-fluid mb-2"
+                             style="width:auto; height:70px;">
+                    @endif
+                    <h6 class="fw-bold text-primary">
+                        {{ $service->{'title_'.app()->getLocale()} }}
+                    </h6>
                 </div>
+            </div>
+        @endforeach
+    </div>
+    {{-- See All di tengah bawah --}}
+<div class="text-center mt-3">
+    <a href="{{ locale_route('frontend.service') }}" 
+       class="fw-light text-primary text-decoration-none">
+        {{ __('frontend.see-all') }}
+    </a>
+</div>
+</div>
 
-                <!-- Practice Areas -->
-                <div id="practice" class="tab-content" style="display: none;">
-                    <div class="row g-4">
-                        @foreach($practiceAreas as $area)
-                            <div class="col-6 col-md-3 text-center">
-                                <div class="practice-item">
-                                    <img src="{{ $area->image }}" alt="{{ $area->title }}" class="img-fluid mb-2">
-                                    <h6>{{ $area->title }}</h6>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="text-center mt-4">
-                        <a href="{{ url('/practice-areas') }}" class="btn-1">
-                            {{ __('frontend.see-all') }} <i class="icon-arrow-1"></i>
-                        </a>
-                    </div>
+<!-- Practice Areas -->
+<div id="practice" class="tab-content" style="display: none;">
+    <div class="row g-4">
+        @foreach($practiceAreas as $area)
+            <div class="col-6 col-md-3 text-center">
+                <div class="practice-item">
+                    @if($area->image)
+                        <img src="{{ asset('assets/images/service/' . $area->image) }}" 
+                             alt="{{ $area->{'title_'.app()->getLocale()} }}" 
+                             class="img-fluid mb-2"
+                             style="width:auto; height:70px;">
+                    @endif
+                    <h6 class="fw-bold text-primary">
+                        {{ $area->{'title_'.app()->getLocale()} }}
+                    </h6>
                 </div>
+            </div>
+        @endforeach
+    </div>
+    {{-- See All di tengah bawah --}}
+<div class="text-center mt-3">
+    <a href="{{ locale_route('frontend.service') }}" 
+       class="fw-light text-primary text-decoration-none">
+        {{ __('frontend.see-all') }}
+    </a>
+</div>
+
+</div>
+
+
             </div>
 
         </div>

@@ -22,7 +22,7 @@ class PracticeAreaDataTable extends DataTable
             })
             ->editColumn('image', function ($model) {
                 return $model->image
-                    ? '<img src="' . asset('storage/' . $model->image) . '" width="50">'
+                    ? '<img src="' . asset('assets/images/service/' . $model->image) . '" width="50">'
                     : '';
             })
             ->addColumn('action', function ($row) {

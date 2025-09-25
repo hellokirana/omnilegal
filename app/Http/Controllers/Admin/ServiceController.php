@@ -29,19 +29,13 @@ class ServiceController extends Controller
             'description_id' => 'nullable|string',
             'description_en' => 'nullable|string',
             'status' => 'required|in:0,1',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'image' => 'required|string', // contoh: "12.png"
         ]);
-
-        $validated['id'] = (string) Str::uuid();
-
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('services', 'public');
-        }
 
         Service::create($validated);
 
-        Session::flash('success', 'Service berhasil disimpan');
-        return redirect()->route('admin.service.index');
+        return redirect()->route('admin.service.index')
+            ->with('success', 'Service berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -58,20 +52,13 @@ class ServiceController extends Controller
             'description_id' => 'nullable|string',
             'description_en' => 'nullable|string',
             'status' => 'required|in:0,1',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'image' => 'nullable|string', // cukup simpan "12.png"
             'created_at' => 'nullable|date',
         ]);
 
         $service = Service::findOrFail($id);
 
-        // Update image jika ada
-        if ($request->hasFile('image')) {
-            if ($service->image) {
-                Storage::disk('public')->delete($service->image);
-            }
-            $validated['image'] = $request->file('image')->store('services', 'public');
-        }
-
+        // langsung update data (image adalah string, tidak upload file)
         $service->update($validated);
 
         // Update created_at jika diisi

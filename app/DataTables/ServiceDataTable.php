@@ -22,9 +22,10 @@ class ServiceDataTable extends DataTable
             })
             ->editColumn('image', function ($model) {
                 return $model->image
-                    ? '<img src="' . asset('storage/' . $model->image) . '" width="50">'
+                    ? '<img src="' . $model->image_url . '" width="40" height="40" style="object-fit:contain; border:1px solid #ddd;" />'
                     : '';
             })
+
             ->addColumn('action', function ($row) {
                 $button = '<a href="' . route('admin.service.edit', $row->id) . '" class="btn btn-warning btn-sm mx-1" title="Edit"><i class="ri-file-edit-line"></i></a>';
                 $button .= '<a href="#" data-url_href="' . route('admin.service.destroy', $row->id) . '" class="btn btn-danger btn-sm mx-1 delete-post" title="Delete" data-csrf="' . csrf_token() . '"><i class="ri-delete-bin-2-line"></i></a>';

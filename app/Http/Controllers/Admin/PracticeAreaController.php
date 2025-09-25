@@ -5,16 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Str;
 use App\Models\PracticeArea;
 use Illuminate\Http\Request;
-use App\DataTables\ContactDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 
 class PracticeAreaController extends Controller
 {
-    public function index(ContactDataTable $dataTable)
+    public function index(\App\DataTables\PracticeAreaDataTable $dataTable)
     {
-        return $dataTable->render('admin.inbox.index');
+        return $dataTable->render('admin.practice-area.index');
     }
 
     public function create()
@@ -30,19 +28,15 @@ class PracticeAreaController extends Controller
             'description_id' => 'nullable|string',
             'description_en' => 'nullable|string',
             'status' => 'required|in:0,1',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'image' => 'required|string', // contoh: "12.png"
         ]);
 
         $validated['id'] = (string) Str::uuid();
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('practice-area', 'public');
-        }
-
         PracticeArea::create($validated);
 
-        Session::flash('success', 'Practice Area berhasil disimpan');
-        return redirect()->route('admin.practice-area.index');
+        return redirect()->route('admin.practice-area.index')
+            ->with('success', 'Practice Area berhasil disimpan');
     }
 
     public function edit($id)
@@ -59,23 +53,15 @@ class PracticeAreaController extends Controller
             'description_id' => 'nullable|string',
             'description_en' => 'nullable|string',
             'status' => 'required|in:0,1',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'image' => 'nullable|string', // nama icon (bisa kosong biar tetap yang lama)
             'created_at' => 'nullable|date',
         ]);
 
         $practiceArea = PracticeArea::findOrFail($id);
 
-        // Update image jika ada
-        if ($request->hasFile('image')) {
-            if ($practiceArea->image) {
-                Storage::disk('public')->delete($practiceArea->image);
-            }
-            $validated['image'] = $request->file('image')->store('practice-area', 'public');
-        }
-
         $practiceArea->update($validated);
 
-        // Update created_at jika diisi
+        // Update created_at jika diisi manual
         if ($request->filled('created_at')) {
             $practiceArea->created_at = $request->created_at;
             $practiceArea->save();
@@ -88,11 +74,6 @@ class PracticeAreaController extends Controller
     public function destroy($id)
     {
         $practiceArea = PracticeArea::findOrFail($id);
-
-        if ($practiceArea->image) {
-            Storage::disk('public')->delete($practiceArea->image);
-        }
-
         $practiceArea->delete();
 
         return response()->json(['success' => 'Practice Area berhasil dihapus']);

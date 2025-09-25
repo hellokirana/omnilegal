@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model 
+class Service extends Model
 {
     use HasUuids;
 
     protected $fillable = [
-        'image',
+        'image',          // akan simpan nama file aja, misal "12.png"
         'title_id',
         'title_en',
         'description_id',
@@ -49,7 +49,7 @@ class Service extends Model
     public function getImageUrlAttribute()
     {
         return $this->image
-            ? asset('storage/service/' . $this->image)
+            ? asset('assets/images/service/' . $this->image) // hanya tambah path di sini
             : 'https://loremflickr.com/800/600';
     }
 

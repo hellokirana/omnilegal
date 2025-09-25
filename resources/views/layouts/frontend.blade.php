@@ -77,12 +77,12 @@
                                 <nav class="main-menu navbar-expand-md navbar-light">
                                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                         <ul class="navigation">
-                                            <li><a href="{{ url('/') }}">{{ __('frontend.home') }}</a></li>
-                                            <li><a href="{{ url('/services-and-practice-areas') }}">{{ __('frontend.services') }}</a></li>
-                                            <li><a href="{{ url('/about') }}">{{ __('frontend.about') }}</a></li>
-                                            <li><a href="{{ url('/news') }}">{{ __('frontend.news') }}</a></li>
-                                            <li><a href="{{ url('/career') }}">{{ __('frontend.career') }}</a></li>
-                                            <li><a href="{{ url('/contact') }}">{{ __('frontend.contact') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.home') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.service') }}">{{ __('frontend.services') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.about') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.news') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.career') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.contact') }}</a></li>
                                         </ul>
                                     </div>
                                 </nav>
@@ -144,16 +144,6 @@
                     @include('layouts.partials.language-switch', ['context' => 'mobile', 'type' => 'dropdown'])
                     <div class="menu-outer">
                         <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-                    </div>
-                    <!--Social Links-->
-                    <div class="social-links">
-                        <ul class="clearfix">
-                            <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                            <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
-                            <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                            <li><a href="#"><span class="fab fa-instagram"></span></a></li>
-                            <li><a href="#"><span class="fab fa-youtube"></span></a></li>
-                        </ul>
                     </div>
                 </nav>
             </div>

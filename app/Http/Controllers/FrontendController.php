@@ -10,6 +10,7 @@ use App\Models\Team;
 use App\Models\Slider;
 use App\Models\Service;
 use App\Models\Website;
+use App\Models\Description;
 use App\Models\PracticeArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -27,8 +28,8 @@ class FrontendController extends Controller
         $stats = Stat::where('status', 1)->get();
         $teams = Team::all();
         $news = News::latest('created_at')->get();
-        $services = Service::where('status', 'active')->take(10)->get();
-        $practiceAreas = PracticeArea::where('status', 'active')->take(10)->get();
+        $services = Service::where('status', 1)->take(10)->get();
+        $practiceAreas = PracticeArea::where('status', 1)->take(10)->get();
 
         $homeServiceAndPracticeAreas = Home::find('68ad9be0-c220-49df-b2a3-3d431023d512');
         $homeStat = Home::find('ec8cf173-5d8a-4c7a-8323-5e08eefcbd78');
@@ -49,6 +50,31 @@ class FrontendController extends Controller
             'homeNews'
         ));
     }
+
+    public function service()
+    {
+        $website = Website::first();
+        $services = Service::where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Ambil semua practice areas dengan status = 1
+        $practiceAreas = PracticeArea::where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $descriptions = Description::all();
+        $homeServiceAndPracticeAreas = Home::find('68ad9be0-c220-49df-b2a3-3d431023d512');
+
+        return view('frontend.service', compact(
+            'services',
+            'practiceAreas',
+            'homeServiceAndPracticeAreas',
+            'descriptions',
+            'website'
+        ));
+    }
+
+
 
     public function media(Request $request)
     {

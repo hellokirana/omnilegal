@@ -49,7 +49,7 @@ class PracticeArea extends Model
     public function getImageUrlAttribute()
     {
         return $this->image
-            ? asset('storage/service/' . $this->image)
+            ? asset('assets/images/service/' . $this->image)  // pakai folder public/assets/images/service
             : 'https://loremflickr.com/800/600';
     }
 
