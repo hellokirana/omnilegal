@@ -75,12 +75,12 @@
                                 <nav class="main-menu navbar-expand-md navbar-light">
                                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                         <ul class="navigation">
-                                            <li><a href="{{ url('/') }}">Home</a></li>
-                                            <li><a href="{{ url('/media') }}">Services & Practices</a></li>
-                                            <li><a href="{{ url('/our_member') }}">About</a></li>
-                                            <li><a href="{{ url('/about') }}">News</a></li>
-                                            <li><a href="{{ url('/contact') }}">Career</a></li>
-                                            <li><a href="{{ url('/contact') }}">Contact</a></li>
+                                            <li><a href="{{ url('/') }}">{{ __('frontend.home') }}</a></li>
+                                            <li><a href="{{ url('/media') }}">{{ __('frontend.services') }}</a></li>
+                                            <li><a href="{{ url('/our_member') }}">{{ __('frontend.about') }}</a></li>
+                                            <li><a href="{{ url('/about') }}">{{ __('frontend.news') }}</a></li>
+                                            <li><a href="{{ url('/contact') }}">{{ __('frontend.career') }}</a></li>
+                                            <li><a href="{{ url('/contact') }}">{{ __('frontend.contact') }}</a></li>
                                         </ul>
                                     </div>
                                 </nav>
@@ -89,7 +89,7 @@
                         <div class="header-right-column d-flex align-items-center">
                             <div class="header-right-btn-area">
                                 {{-- Language Switch --}}
-@include('layouts.partials.language-switch', ['context' => 'lower', 'type' => 'radio'])
+                                @include('layouts.partials.language-switch', ['context' => 'lower', 'type' => 'radio'])
                             </div>
                         </div>
 
@@ -139,7 +139,7 @@
                                 src="{{ asset('assets/images/logo.png') }}" alt="logo"></a></div>
                     
                     {{-- Language Switch for Mobile Menu --}}
-@include('layouts.partials.language-switch', ['context' => 'mobile', 'type' => 'dropdown'])
+                    @include('layouts.partials.language-switch', ['context' => 'mobile', 'type' => 'dropdown'])
                     <div class="menu-outer">
                         <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
                     </div>

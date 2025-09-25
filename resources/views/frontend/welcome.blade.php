@@ -45,10 +45,10 @@
                     <div class="service-practice-switch mt-3">
                         <div class="sp-switch">
                             <input type="radio" id="switch-services" name="switch-tab" checked>
-                            <label for="switch-services" onclick="showTab('services')">Services</label>
+                            <label for="switch-services" onclick="showTab('services')">{{ __('frontend.services-btn') }}</label>
 
                             <input type="radio" id="switch-practice" name="switch-tab">
-                            <label for="switch-practice" onclick="showTab('practice')">Practice Areas</label>
+                            <label for="switch-practice" onclick="showTab('practice')">{{ __('frontend.practices-btn') }}</label>
 
                             <span class="sp-switch-highlight"></span>
                         </div>
