@@ -2,44 +2,27 @@
 
 @section('content')
     <!-- banner-section -->
-    {{-- <section class="banner-section-one ">
-        <div class="bg-layer" style="background-image: url({{ asset('assets/images/banner/banner-1-bg.jpg') }});">
-        </div>
-        <div class="container">
-            <div class="swiper-container">
-                <div class="swiper single-item-carousel">
-                    <div class="swiper-wrapper">
-                        @forelse($sliders as $slider)
-                            <div class="swiper-slide testimonial-slider-item">
-                                <a href="{{ $slider->link }}" target="_blank">
-                                    <img src="{{ $slider->image_url }}" class="w-100">
-                                </a>
-                            </div>
-                        @empty
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <section class="banner-section">
     <div class="swiper-container">
         <div class="swiper single-item-carousel">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://picsum.photos/1920/1080?random=1" alt="Banner 1">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://picsum.photos/1920/1080?random=2" alt="Banner 2">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://picsum.photos/1920/1080?random=3" alt="Banner 3">
-                </div>
+                @foreach ($sliders as $slider)
+                    <div class="swiper-slide">
+                        @if ($slider->link)
+                            <a href="{{ $slider->link }}" target="_blank" class="banner-link">
+                                <img src="{{ asset($slider->image_url) }}" alt="Banner {{ $loop->iteration }}">
+                            </a>
+                        @else
+                            <img src="{{ asset($slider->image_url) }}" alt="Banner {{ $loop->iteration }}">
+                        @endif
+
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
 </section>
+
 
 
 

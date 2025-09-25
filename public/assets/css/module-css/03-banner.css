@@ -12,14 +12,14 @@ banner one
     left: 0;
     right: 0;
     bottom: 0;
-    height: 60%; /* seberapa tinggi gradientnya */
+    height: 60%;
     background: linear-gradient(
         to top,
         rgba(255, 255, 255, 1) 0%,
         rgba(255, 255, 255, 0) 100%
     );
-    pointer-events: none; /* biar ga ganggu klik */
-    z-index: 2; /* pastikan di atas gambar */
+    pointer-events: none;
+    z-index: 2;
 }
 
 .banner-section .bg-layer {
@@ -34,6 +34,12 @@ banner one
     position: relative;
     width: 100%;
     overflow: hidden;
+}
+
+.banner-section .banner-link {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .banner-section .banner-content-box {

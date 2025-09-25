@@ -61,7 +61,7 @@ class SliderController extends Controller
         $data->save();
 
         Session::flash('success', 'Data berhasil disimpan');
-        return redirect()->route('slider.index');
+        return redirect()->route('admin.slider.index');
     }
 
     public function edit($id)
@@ -109,7 +109,7 @@ class SliderController extends Controller
         $data->save();
 
         Session::flash('success', 'Data berhasil diperbarui');
-        return redirect()->route('slider.index');
+        return redirect()->route('admin.slider.index');
     }
 
     public function destroy($id)
