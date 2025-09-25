@@ -49,19 +49,11 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
     Route::get('/content', [ContentController::class, 'index'])->name('content.index');
     Route::post('/content/store', [ContentController::class, 'storeContent'])->name('content.store');
     Route::put('/content/update/{id}', [ContentController::class, 'updateContent'])->name('content.update');
-
-    // CRUD Stats
-    Route::get('/stat', [StatController::class, 'index'])->name('stats.index');
-    Route::post('/stat/store', [StatController::class, 'storeStat'])->name('stats.store');
-    Route::put('/stat/update/{id}', [StatController::class, 'updateStat'])->name('stats.update');
-    Route::delete('/stat/delete/{id}', [StatController::class, 'deleteStat'])->name('stats.delete');
-
-
-
     Route::prefix('admin')
         ->name('admin.')
         ->middleware('role:superadmin')
         ->group(function () {
+            Route::resource('stat', StatController::class);
             Route::resource('news', NewsController::class);
             Route::resource('category', CategoryController::class);
             Route::resource('service', ServiceController::class);

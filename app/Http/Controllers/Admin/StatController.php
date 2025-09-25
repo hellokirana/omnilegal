@@ -2,74 +2,95 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Home;
 use App\Models\Stat;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\DataTables\StatDataTable;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class StatController extends Controller
 {
-    public function index()
+    public function index(StatDataTable $dataTable)
     {
-        $stats = Stat::paginate(5);
-
-        return view('admin.stat.index', compact('stats'));
+        return $dataTable->render('admin.slider.index');
     }
 
-    public function storeStat(Request $request)
+    public function create()
     {
-        $request->validate([
-            'label_id' => 'required|string|max:255',
-            'label_en' => 'required|string|max:255',
+        return view('admin.stat.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'label_id' => 'nullable|string|max:255',
+            'label_en' => 'nullable|string|max:255',
             'value' => 'required|string|max:255',
-            'status' => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'status' => 'required|in:0,1',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
 
-        $data = $request->only(['label_id', 'label_en', 'value', 'status']);
+        $validated['id'] = (string) Str::uuid();
 
+        // Upload image jika ada
         if ($request->hasFile('image')) {
-            $filename = time() . '.' . $request->image->extension();
-            $request->image->storeAs('stats', $filename, 'public');
-            $data['image'] = $filename;
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->storeAs('stat', $filename, 'public');
+            $validated['image'] = $filename;
         }
 
-        Stat::create($data);
+        Stat::create($validated);
 
-        return redirect()->back()->with('success', 'Stat added successfully!');
+        Session::flash('success', 'Stat berhasil disimpan');
+        return redirect()->route('admin.stat.index');
     }
 
-    public function updateStat(Request $request, $id)
+    public function edit($id)
     {
-        $request->validate([
-            'label_id' => 'required|string|max:255',
-            'label_en' => 'required|string|max:255',
+        $stat = Stat::findOrFail($id);
+        return view('admin.stat.edit', compact('stat'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'label_id' => 'nullable|string|max:255',
+            'label_en' => 'nullable|string|max:255',
             'value' => 'required|string|max:255',
-            'status' => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'status' => 'required|in:0,1',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
 
         $stat = Stat::findOrFail($id);
-        $data = $request->only(['label_id', 'label_en', 'value', 'status']);
 
+        // Update image jika ada
         if ($request->hasFile('image')) {
-            $filename = time() . '.' . $request->image->extension();
-            $request->image->storeAs('stats', $filename, 'public');
-            $data['image'] = $filename;
+            if ($stat->image) {
+                Storage::disk('public')->delete('stat/' . $stat->image);
+            }
+            $filename = $request->file('image')->hashName();
+            $request->file('image')->storeAs('stat', $filename, 'public');
+            $validated['image'] = $filename;
         }
 
-        $stat->update($data);
+        $stat->update($validated);
 
-        return redirect()->back()->with('success', 'Stat updated successfully!');
+        Session::flash('success', 'Stat berhasil diupdate');
+        return redirect()->route('admin.stat.index');
     }
 
-    public function deleteStat($id)
+    public function destroy($id)
     {
         $stat = Stat::findOrFail($id);
+
+        if ($stat->image) {
+            Storage::disk('public')->delete('stat/' . $stat->image);
+        }
 
         $stat->delete();
 
-        return redirect()->back()->with('success', 'Stat deleted successfully!');
+        return response()->json(['success' => 'Stat berhasil dihapus']);
     }
-
 }
