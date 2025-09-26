@@ -1,27 +1,82 @@
 /* ----------------------------------------
-banner one
--------------------------------------------*/
+Banner Section
+----------------------------------------*/
 .banner-section {
     position: relative;
     overflow: hidden;
     padding: 0;
 }
-.banner-section::after {
-    content: "";
+
+.overlay-gradient {
     position: absolute;
+    top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
         to top,
         rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
         rgba(255, 255, 255, 0) 100%
     );
+    z-index: 3;
     pointer-events: none;
-    z-index: 2;
 }
 
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    padding: 0 1rem;
+    max-width: 800px;
+    z-index: 3; /* konten di atas overlay */
+}
+
+.banner-content h1 {
+    color: #303192; /* primary color */
+    font-size: 4rem;
+}
+
+.banner-content h5 {
+    color: #000;
+}
+
+.banner-content .btn-primary {
+    background-color: #303192 !important;
+    border-color: #303192 !important;
+    color: #fff !important;
+    z-index: 5; /* selalu di atas overlay */
+}
+
+.banner-content .btn-primary:hover {
+    background-color: #1f2170 !important;
+    border-color: #1f2170 !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .banner-content h1 {
+        font-size: 3rem;
+    }
+    .banner-content h5 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .banner-content h1 {
+        font-size: 2rem;
+    }
+    .banner-content h5 {
+        font-size: 0.9rem;
+    }
+    .banner-content .btn-primary {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+}
 .banner-section .bg-layer {
     background-position: center !important;
 }

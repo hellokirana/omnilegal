@@ -2,29 +2,41 @@
 
 @section('content')
     <!-- banner-section -->
-    <section class="banner-section">
+<section class="banner-section position-relative">
     <div class="swiper-container">
         <div class="swiper single-item-carousel">
             <div class="swiper-wrapper">
                 @foreach ($sliders as $slider)
-                    <div class="swiper-slide">
-                        @if ($slider->link)
-                            <a href="{{ $slider->link }}" target="_blank" class="banner-link">
-                                <img src="{{ asset($slider->image_url) }}" alt="Banner {{ $loop->iteration }}">
-                            </a>
-                        @else
-                            <img src="{{ asset($slider->image_url) }}" alt="Banner {{ $loop->iteration }}">
-                        @endif
+                    <div class="swiper-slide position-relative">
+                        {{-- Gambar banner --}}
+                        <img src="{{ asset($slider->image_url) }}" 
+                             alt="Banner {{ $loop->iteration }}" 
+                             class="w-100">
 
+                        {{-- Overlay putih transparan + gradient --}}
+                        <div class="overlay-gradient"></div>
+
+                        {{-- Konten di atas overlay --}}
+                        <div class="banner-content position-absolute top-50 start-50 translate-middle text-left px-3">
+                            <h1 class="fw-bold mb-3" style="color: #303192; font-size: 4rem;">
+                                {{ $slider->{'title_' . app()->getLocale()} }}
+                            </h1>
+                            <h5 class="mb-3" style="color: #000;">
+                                {{ $slider->{'description_' . app()->getLocale()} }}
+                            </h5>
+                            @if($slider->{'link_caption_' . app()->getLocale()})
+                                <a href="{{ $slider->link ?? 'javascript:void(0)' }}" 
+                                   class="btn btn-primary rounded-pill">
+                                    {{ $slider->{'link_caption_' . app()->getLocale()} }}
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 @endforeach
             </div>
         </div>
     </div>
 </section>
-
-
-
 
 <!-- service & practise area page -->
 <section class="about-page">
