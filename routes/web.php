@@ -36,7 +36,9 @@ Route::prefix('{locale}')
         Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
         Route::get('/services-and-practice-areas', [FrontendController::class, 'service'])->name('frontend.service');
         Route::get('/news', [FrontendController::class, 'news'])->name('frontend.news');
-        Route::get('/news/{id}', [FrontendController::class, 'news-detail'])->name('frontend.news-detail');
+        Route::get('/news/{slug}', [FrontendController::class, 'newsDetail'])
+            ->name('frontend.news-detail')
+            ->where('slug', '[a-z0-9\-]+');
         Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
         Route::get('/career', [FrontendController::class, 'career'])->name('frontend.career');
         Route::post('/send-career', [FrontendController::class, 'send_career'])->name('frontend.send-career');

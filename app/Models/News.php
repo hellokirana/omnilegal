@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class News extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, Sluggable;
     protected $table = 'news';
     public $timestamps = true;
     protected $fillable = [
@@ -53,19 +54,45 @@ class News extends Model
         return $this->{$field . '_en'};
     }
 
-    public function getTitleAttribute()
+    // Ambil title sesuai locale target
+    public function getTitleByLocale($locale)
     {
-        return $this->getLocalized('title');
+        $column = 'title_' . $locale;
+        return $this->{$column} ?: $this->title_en;
     }
 
-    public function getContentAttribute()
+    // Ambil content sesuai locale target
+    public function getContentByLocale($locale)
     {
-        return $this->getLocalized('content');
+        $column = 'content_' . $locale;
+        return $this->{$column} ?: $this->content_en;
+    }
+
+    // Ambil slug sesuai locale target
+    public function getSlugByLocale($locale)
+    {
+        $column = 'slug_' . $locale;
+        return $this->{$column} ?: $this->slug_en;
+    }
+
+
+
+    public function getTitleAttribute()
+    {
+        $locale = app()->getLocale();
+        return $this->{'title_' . $locale};
     }
 
     public function getSlugAttribute()
     {
-        return $this->getLocalized('slug');
+        $locale = app()->getLocale();
+        return $this->{'slug_' . $locale};
+    }
+
+    public function getContentAttribute()
+    {
+        $locale = app()->getLocale();
+        return $this->{'content_' . $locale};
     }
 
     public function getDocumentAttribute()
@@ -112,8 +139,14 @@ class News extends Model
     public function sluggable(): array
     {
         return [
-            'slug_id' => ['source' => 'title_id'],
-            'slug_en' => ['source' => 'title_en'],
+            'slug_id' => [
+                'source' => 'title_id',
+                'onUpdate' => true
+            ],
+            'slug_en' => [
+                'source' => 'title_en',
+                'onUpdate' => true
+            ],
         ];
     }
 }

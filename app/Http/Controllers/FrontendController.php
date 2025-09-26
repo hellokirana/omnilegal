@@ -12,6 +12,7 @@ use App\Models\Slider;
 use App\Models\Contact;
 use App\Models\Service;
 use App\Models\Website;
+use App\Models\Category;
 use App\Models\Disclaimer;
 use App\Models\Description;
 use Illuminate\Support\Str;
@@ -188,86 +189,66 @@ class FrontendController extends Controller
         ]);
     }
 
-
-
-    public function media(Request $request)
+    public function news(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'kategori' => 'nullable|string', // UUID adalah string
-            'cari' => 'nullable|string',
-        ]);
+        $website = Website::first();
+        $description = Description::first();
+        $homeNews = Home::find('a0810373-cfec-4146-a853-cee47af08a2a');
 
-        // Ambil parameter dari request
-        $kategori = $request->kategori;
-        $cari = $request->cari;
+        // Get all categories for filter
+        $categories = Category::where('status', 1)->get();
 
-        // Ambil semua kategori yang aktif
-        $kategori_all = Kategori::where('status', 1)->orderBy('no_urut')->get();
-
-        // Query Media
-        $query = Media::query();
-        $query->where('status', 1);
-
-        // Filter berdasarkan pencarian
-        if (!empty($cari)) {
-            $query->where('title', 'like', '%' . $cari . '%');
-        }
-
-        // Filter berdasarkan kategori (UUID)
-        if (!empty($kategori)) {
-            $query->where('kategori_id', $kategori);
-        }
-
-        // Paginasi hasil query
-        try {
-            $media_all = $query->with('kategori')->latest()->paginate(15);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat memuat data.');
-        }
-
-        // Tampilkan view dengan data
-        return view('frontend.media', compact('media_all', 'kategori_all', 'kategori', 'cari'));
-    }
-
-    public function media_detail($slug)
-    {
-        $data = Media::with('kategori')->where('status', 1)->where('slug', $slug)->first();
-        if (empty($data)) {
-            return redirect()->back()->with('error', 'data tidak ditemukan');
-        }
-
-        $data_related = Media::with('kategori')
+        // Get news with filters
+        $query = News::with('category')
             ->where('status', 1)
-            ->where('slug', '!=', $slug)
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
+            ->orderBy('created_at', 'desc');
 
-        // Tambahan: ambil artikel featured
-        $featuredArticles = Media::where('status', 1)
-            ->where('featured', 1)
-            ->limit(5)
-            ->get();
+        // Filter by category if provided
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category_id', $request->category);
+        }
 
-        return view('frontend.media_detail', compact('data', 'data_related', 'featuredArticles'));
+        // Search by title if provided
+        if ($request->has('search') && $request->search != '') {
+            $locale = app()->getLocale();
+            $titleColumn = "title_{$locale}";
+            $query->where($titleColumn, 'like', '%' . $request->search . '%');
+        }
+
+        $news = $query->paginate(12);
+
+        return view('frontend.news', compact(
+            'website',
+            'description',
+            'homeNews',
+            'categories',
+            'news'
+        ));
     }
 
-    public function our_member()
+    public function newsDetail($locale, $slug)
     {
-        $founders = Testimoni::where('type', 'Founder')->get();
-        $testimoni_all = Testimoni::orderBy('nama')->get();
-        $testimoni_founder = Testimoni::where('type', 'founder')->orderBy('nama')->get();
-        $members = User::where('type', 'member')
-            ->whereNotNull('company_name')
-            ->whereNotNull('company_website')
-            ->get();
+        // Set locale untuk aplikasi
+        app()->setLocale($locale);
 
-        return view('frontend.our_member', compact('founders', 'members', 'testimoni_all', 'testimoni_founder'));
+        $slugColumn = 'slug_' . $locale;
+
+        // Ambil data website
+        $website = Website::first();
+
+        // Ambil berita sesuai slug dan locale
+        $news = News::with('category')
+            ->where($slugColumn, $slug)
+            ->where('status', 1)
+            ->firstOrFail();
+
+        // Breadcrumb
+        $breadcrumbs = [
+            ['title' => __('frontend.news'), 'url' => locale_route('frontend.news')],
+            ['title' => $news->category ? ($locale == 'id' ? $news->category->title_id : $news->category->title_en) : '-', 'url' => '#'],
+            ['title' => $news->{'title_' . $locale}, 'url' => '']
+        ];
+
+        return view('frontend.news-detail', compact('website', 'news', 'breadcrumbs'));
     }
-
-
-
-
-
 }

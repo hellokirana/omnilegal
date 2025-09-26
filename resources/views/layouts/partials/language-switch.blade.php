@@ -1,26 +1,33 @@
 @php
-    // defaults kalau tidak dikirim saat include
-    $type = $type ?? 'radio';        // 'radio' atau 'dropdown'
-    $context = $context ?? 'default'; // untuk buat name/id unik
-
+    $type = $type ?? 'radio';
+    $context = $context ?? 'default';
     $currentLocale = app()->getLocale() ?? 'en';
     $segments = request()->segments();
 
-    // pastikan segmen pertama adalah locale; kalau tidak ada atau invalid, masukkan currentLocale
+    // pastikan segmen pertama adalah locale
     if (!isset($segments[0]) || !in_array($segments[0], ['id', 'en'])) {
         array_unshift($segments, $currentLocale);
     }
 
-    // buat copy untuk ID dan EN dan sisipkan query string jika ada
+    // default fallback URL
     $segmentsId = $segments;
     $segmentsId[0] = 'id';
     $pathId = implode('/', $segmentsId);
-    $urlId = url($pathId) . (request()->getQueryString() ? '?'.request()->getQueryString() : '');
+    $urlIdFallback = url($pathId) . (request()->getQueryString() ? '?'.request()->getQueryString() : '');
 
     $segmentsEn = $segments;
     $segmentsEn[0] = 'en';
     $pathEn = implode('/', $segmentsEn);
-    $urlEn = url($pathEn) . (request()->getQueryString() ? '?'.request()->getQueryString() : '');
+    $urlEnFallback = url($pathEn) . (request()->getQueryString() ? '?'.request()->getQueryString() : '');
+
+    // jika sedang di news-detail dan ada $news, pakai slug target locale
+    if (request()->routeIs('frontend.news-detail') && isset($news)) {
+        $urlId = locale_route('frontend.news-detail', ['locale' => 'id', 'slug' => $news->getSlugByLocale('id')]);
+        $urlEn = locale_route('frontend.news-detail', ['locale' => 'en', 'slug' => $news->getSlugByLocale('en')]);
+    } else {
+        $urlId = $urlIdFallback;
+        $urlEn = $urlEnFallback;
+    }
 @endphp
 
 @if ($type === 'radio' && $context === 'lower')
