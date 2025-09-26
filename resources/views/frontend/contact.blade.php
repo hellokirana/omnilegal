@@ -45,7 +45,7 @@
             {{-- Right Side - Form --}}
             <div class="col-lg-7">
                 <div class="bg-white rounded-3 shadow-sm p-5">
-                    <h3 class="fw-bold mb-4">{{ __('frontend.send-message') }}</h3>
+                    <h3 id="send-message" class="fw-bold mb-4">{{ __('frontend.send-message') }}</h3>
                     
                     {{-- Alert --}}
                     @if (Session::has('success'))

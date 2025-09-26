@@ -195,7 +195,7 @@
                 <h4 class="fw-bold text-primary mb-3">{{ __('frontend.contact-us') }}</h4>
                 <p class="mb-0">
     <i class="fas fa-paper-plane me-2 text-primary"></i>
-    <a href="{{ locale_route('frontend.contact') }}" class="text-dark text-decoration-none">
+    <a href="{{ locale_route('frontend.contact') }}#send-message" class="text-dark text-decoration-none">
         {{ __('frontend.send-message') }}
     </a>
 </p>
