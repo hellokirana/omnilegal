@@ -91,7 +91,7 @@
                         </div>
                         
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill">
                                 {{ __('frontend.submit_message') }}
                             </button>
                         </div>

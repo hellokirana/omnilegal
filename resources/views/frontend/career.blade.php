@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill">
                                 {{ __('frontend.submit_application') }}
                             </button>
                         </div>

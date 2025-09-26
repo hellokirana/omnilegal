@@ -16,10 +16,11 @@ return [
     'check-disclaimer' => 'Check Disclaimer',
     'legal' => 'Copyright © 2022 Omnilegal. All Rights Reserved.',
     'back-to-home' => 'Back to Home',
+    'back_to_news' => 'Back to News',
 
     'footer1' => 'Do You Need',
     'footer2' => 'Legal Help?',
-    'footer-caption' => "Don’t hesitate to contact us if you need
+    'footer-caption' => "Don't hesitate to contact us if you need
 further information",
 
     'contact-us' => 'Contact Us',
@@ -43,4 +44,8 @@ further information",
     'upload_resume' => 'Application or Resume',
     'submit_application' => 'Submit Application',
 
+    'all_categories' => 'All',
+
+    'author' => 'Written by',
+    'download_document' => 'Download News Here',
 ];

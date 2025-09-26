@@ -28,22 +28,22 @@
 
 {{-- News Filter --}}
 <section class="news-filter py-5">
-    <div class="container text-center">
-        <h2 class="mb-4">{{ __('frontend.filter_by_category') }}</h2>
-        <div class="d-flex flex-wrap justify-content-center gap-2">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-start gap-2">
             <a href="{{ locale_route('frontend.news') }}" 
-               class="btn btn-outline-primary {{ request('category') == '' ? 'active' : '' }}">
+               class="btn btn-secondary btn-sm px-3 py-2 rounded-pill {{ request('category') == '' ? 'active' : '' }}">
                {{ __('frontend.all_categories') }}
             </a>
             @foreach($categories as $category)
                 <a href="{{ locale_route('frontend.news', ['category' => $category->id]) }}" 
-                   class="btn btn-outline-primary {{ request('category') == $category->id ? 'active' : '' }}">
+                   class="btn btn-secondary btn-sm px-3 py-2 rounded-pill {{ request('category') == $category->id ? 'active' : '' }}">
                     {{ app()->getLocale() == 'id' ? $category->title_id : $category->title_en }}
                 </a>
             @endforeach
         </div>
     </div>
 </section>
+
 
 
 <section class="news-list py-5">
@@ -71,7 +71,7 @@
                             </p>
 
                             <a href="{{ locale_route('frontend.news-detail', ['slug' => $item->slug]) }}" class="mt-auto text-primary fw-bold">
-    {{ __('frontend.read_article') }} >>
+    {{ __('frontend.read-article') }} >>
 </a>
                         </div>
                     </div>

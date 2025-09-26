@@ -15,7 +15,8 @@ return [
     'read-article' => 'Baca Artikel',
     'check-disclaimer' => 'Lihat Disclaimer',
     'legal' => 'Hak Cipta © 2022 Omnilegal. Seluruh hak cipta.',
-    'back-to-home' => 'Kembali ke Home',
+    'back-to-home' => 'Kembali ke Beranda',
+    'back_to_news' => 'Kembali ke Berita',
 
     'footer1' => 'Apakah Kamu Membutuhkan',
     'footer2' => 'Bantuan Legal?',
@@ -39,5 +40,10 @@ informasi lebih lanjut.",
     'join_our_team' => 'Bergabunglah dengan Kami',
     'upload_resume' => 'CV atau Daftar Riwayat Hidup',
     'submit_application' => 'Submit CV',
+
+    'all_categories' => 'Semua',
+
+    'author' => 'Ditulis oleh',
+    'download_document' => 'Unduh Berita Disini',
 
 ];
