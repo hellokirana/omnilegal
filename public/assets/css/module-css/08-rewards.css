@@ -1,3 +1,7 @@
+.career-description p {
+    text-align: center !important;
+    margin-bottom: 1rem;
+}
 .team-card-horizontal {
     background: #fff;
     transition: all 0.3s ease;

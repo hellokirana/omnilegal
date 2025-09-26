@@ -7,12 +7,14 @@ use App\Models\Home;
 use App\Models\News;
 use App\Models\Stat;
 use App\Models\Team;
+use App\Models\Career;
 use App\Models\Slider;
 use App\Models\Contact;
 use App\Models\Service;
 use App\Models\Website;
 use App\Models\Disclaimer;
 use App\Models\Description;
+use Illuminate\Support\Str;
 use App\Models\PracticeArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -137,6 +139,55 @@ class FrontendController extends Controller
         $data->save();
         return redirect()->back()->with('success', __('frontend.send_success'));
     }
+
+    public function career()
+    {
+        $website = Website::first();
+        $description = Description::first();
+        $homeCareer = Home::find('8cffeb72-9ab5-11f0-81d4-cc6b1e6d7dc0');
+        return view('frontend.career', compact('website', 'homeCareer', 'description'));
+    }
+
+    public function send_career(Request $request)
+    {
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'subject' => 'nullable|string|max:255',
+            'message' => 'nullable|string',
+            'aplication' => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+        ]);
+
+        if ($validated->fails()) {
+            return redirect()->back()
+                ->withErrors($validated)
+                ->withInput()
+                ->with('warning', __('frontend.send_fail'));
+        }
+
+        $career = new Career();
+        $career->id = Str::uuid();
+        $career->name = $request->name;
+        $career->email = $request->email;
+        $career->subject = $request->subject;
+        $career->message = $request->message;
+
+        if ($request->hasFile('aplication')) {
+            $file = $request->file('aplication');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/careers', $filename);
+            $career->aplication = $filename;
+        }
+
+        $career->save();
+
+        return redirect()->back()->with([
+            'success' => __('frontend.send_success'),
+            'file_url' => $career->aplication_url, // gunakan accessor
+            'file_name' => $career->aplication
+        ]);
+    }
+
 
 
     public function media(Request $request)

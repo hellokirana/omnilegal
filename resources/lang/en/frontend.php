@@ -39,4 +39,8 @@ further information",
     'send_success' => 'Message sent successfully',
     'send_fail' => 'Failed to save data',
 
+    'join_our_team' => 'Join Our Team',
+    'upload_resume' => 'Application or Resume',
+    'submit_application' => 'Submit Application',
+
 ];

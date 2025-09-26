@@ -36,7 +36,7 @@ class Career extends Model
     public function getAplicationUrlAttribute()
     {
         return $this->aplication
-            ? asset('storage/news/' . $this->aplication)
+            ? asset('storage/careers/' . $this->aplication)
             : null;
     }
 }

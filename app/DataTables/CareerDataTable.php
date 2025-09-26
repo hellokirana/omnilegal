@@ -19,13 +19,14 @@ class CareerDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->editColumn('aplication', function ($model) {
                 if ($model->aplication) {
-                    $url = asset('storage/' . $model->aplication); // pastikan file tersimpan di storage/public
+                    $url = $model->aplication_url; // gunakan accessor
                     return '<a href="' . $url . '" target="_blank" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-file-download me-1"></i> Download
-                        </a>';
+                    <i class="fas fa-file-download me-1"></i> Download
+                </a>';
                 }
                 return '-';
             })
+
             ->editColumn('created_at', function ($model) {
                 return $model->created_at ? $model->created_at->format('d-m-Y H:i:s') : '';
             })
@@ -34,7 +35,8 @@ class CareerDataTable extends DataTable
                 $button .= '<button type="button" class="btn btn-danger btn-sm mx-1 delete-post" data-bs-toggle="tooltip" title="Hapus" data-url="' . route('admin.career.destroy', $model->id) . '" data-csrf="' . csrf_token() . '"><i class="ri-delete-bin-2-line"></i></button>';
                 return $button;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['aplication', 'action']);
+
     }
 
     /**

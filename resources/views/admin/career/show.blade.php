@@ -11,47 +11,48 @@
         <div class="card-body">
             <div class="mb-3">
                 <strong>Nama:</strong>
-                <p class="mb-0">{{ $contact->name }}</p>
+                <p class="mb-0">{{ $career->name }}</p>
             </div>
 
             <div class="mb-3">
                 <strong>Email:</strong>
-                <p class="mb-0">{{ $contact->email }}</p>
+                <p class="mb-0">{{ $career->email }}</p>
             </div>
 
             <div class="mb-3">
                 <strong>Subjek:</strong>
-                <p class="mb-0">{{ $contact->subject }}</p>
+                <p class="mb-0">{{ $career->subject }}</p>
             </div>
 
             <div class="mb-3">
                 <strong>Tanggal:</strong>
-                <p class="mb-0">{{ $contact->created_at->format('d-m-Y H:i:s') }}</p>
+                <p class="mb-0">{{ $career->created_at->format('d-m-Y H:i:s') }}</p>
             </div>
 
             <div class="mb-3">
                 <strong>Pesan:</strong>
-                <p class="border rounded p-3 bg-light">{{ $contact->message }}</p>
+                <p class="border rounded p-3 bg-light">{{ $career->message }}</p>
             </div>
 
-            @if($contact->aplication)
+            @if($career->aplication)
             <div class="mb-3">
                 <strong>File Aplication (PDF):</strong>
                 <div class="border rounded p-2 bg-light">
-                    <embed src="{{ asset('storage/' . $contact->aplication) }}" 
-                           type="application/pdf" 
-                           width="100%" 
-                           height="500px">
+                    <embed src="{{ $career->aplication_url }}" 
+                        type="application/pdf" 
+                        width="100%" 
+                        height="500px">
                 </div>
-                <a href="{{ asset('storage/' . $contact->aplication) }}" target="_blank" class="btn btn-primary btn-sm mt-2">
+                <a href="{{ $career->aplication_url }}" target="_blank" class="btn btn-primary btn-sm mt-2">
                     <i class="fas fa-download me-1"></i> Download File
                 </a>
             </div>
             @endif
+
         </div>
 
         <div class="card-footer text-end">
-            <form action="{{ route('admin.career.destroy', $contact->id) }}" method="POST" class="delete-form" data-name="{{ $contact->name }}">
+            <form action="{{ route('admin.career.destroy', $career->id) }}" method="POST" class="delete-form" data-name="{{ $career->name }}">
                 @csrf
                 @method('DELETE')
                 <button type="button" class="btn btn-danger delete-btn">Hapus Aplication</button>

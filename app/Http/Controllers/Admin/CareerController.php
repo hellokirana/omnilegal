@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Contact;
+use App\Models\Career;
 use Illuminate\Http\Request;
 use App\DataTables\CareerDataTable;
 use App\Http\Controllers\Controller;
@@ -15,15 +15,15 @@ class CareerController extends Controller
 
     public function show($id)
     {
-        $contact = Contact::findOrFail($id);
+        $career = Career::findOrFail($id);
 
-        return view('admin.career.show', compact('contact'));
+        return view('admin.career.show', compact('career'));
     }
 
     public function destroy($id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
+        $career = Career::findOrFail($id);
+        $career->delete();
 
         return redirect()->route('admin.career.index')->with('success', 'Pesan berhasil dihapus');
     }

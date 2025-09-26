@@ -38,7 +38,8 @@ Route::prefix('{locale}')
         Route::get('/news', [FrontendController::class, 'news'])->name('frontend.news');
         Route::get('/news/{id}', [FrontendController::class, 'news-detail'])->name('frontend.news-detail');
         Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
-        Route::get('/career', [FrontendController::class, 'our_member'])->name('frontend.career');
+        Route::get('/career', [FrontendController::class, 'career'])->name('frontend.career');
+        Route::post('/send-career', [FrontendController::class, 'send_career'])->name('frontend.send-career');
         Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
         Route::post('/send-contact', [FrontendController::class, 'send_contact'])->name('frontend.send-contact');
         Route::get('/disclaimer', [FrontendController::class, 'disclaimer'])->name('frontend.disclaimer');

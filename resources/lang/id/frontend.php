@@ -36,4 +36,8 @@ informasi lebih lanjut.",
     'send_success' => 'Pesan berhasil dikirim',
     'send_fail' => 'Data gagal disimpan',
 
+    'join_our_team' => 'Bergabunglah dengan Kami',
+    'upload_resume' => 'CV atau Daftar Riwayat Hidup',
+    'submit_application' => 'Submit CV',
+
 ];
