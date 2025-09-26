@@ -20,17 +20,10 @@ class ContactDataTable extends DataTable
             ->editColumn('created_at', function ($model) {
                 return $model->created_at ? $model->created_at->format('d-m-Y H:i:s') : '';
             })
-            ->editColumn('status', function ($model) {
-                return ucfirst($model->status ?? 'new');
-            })
             ->addColumn('action', function ($model) {
-                return '
-                    <a href="' . route('inbox.show', $model->id) . '" class="btn btn-sm btn-primary">Lihat</a>
-                    <form action="' . route('inbox.destroy', $model->id) . '" method="POST" style="display:inline;">
-                        ' . csrf_field() . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Hapus pesan ini?\')">Hapus</button>
-                    </form>
-                ';
+                $button = '<a href="' . route('admin.inbox.show', $model->id) . '" class="btn btn-primary btn-sm mx-1" data-bs-toggle="tooltip" title="Lihat"><i class="ri-eye-line"></i></a>';
+                $button .= '<button type="button" class="btn btn-danger btn-sm mx-1 delete-post" data-bs-toggle="tooltip" title="Hapus" data-url="' . route('admin.inbox.destroy', $model->id) . '" data-csrf="' . csrf_token() . '"><i class="ri-delete-bin-2-line"></i></button>';
+                return $button;
             })
             ->rawColumns(['action']);
     }
@@ -40,7 +33,14 @@ class ContactDataTable extends DataTable
      */
     public function query(Contact $model): QueryBuilder
     {
-        return $model->newQuery()->latest();
+        return $model->newQuery()->select([
+            'id',
+            'name',
+            'email',
+            'subject',
+            'message',
+            'created_at',
+        ])->latest();
     }
 
     /**
@@ -66,14 +66,12 @@ class ContactDataTable extends DataTable
             Column::make('name')->title('Nama'),
             Column::make('email')->title('Email'),
             Column::make('subject')->title('Subjek'),
-            Column::make('message')->title('Pesan'),
-            Column::make('status')->title('Status'),
+            Column::make('message')->title('Pesan')->visible(false), // bisa di-hide
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(150)
-                ->addClass('text-center')
-                ->title('Aksi'),
+                ->width(120)
+                ->addClass('text-center'),
         ];
     }
 

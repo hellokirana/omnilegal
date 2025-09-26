@@ -26,4 +26,14 @@ informasi lebih lanjut.",
     'visit-us' => 'Kunjungi Kami di',
     'send-message' => 'Kirim Pesan',
 
+    'full_name' => 'Nama Lengkap',
+    'your_email' => 'Email Anda',
+    'subject' => 'Subjek',
+    'your_message' => 'Pesan Anda',
+    'confirm_info' => 'Saya bertanggung jawab atas kebenaran informasi yang saya kirim.',
+    'submit_message' => 'Submit Message',
+
+    'send_success' => 'Pesan berhasil dikirim',
+    'send_fail' => 'Data gagal disimpan',
+
 ];

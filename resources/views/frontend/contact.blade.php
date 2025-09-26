@@ -1,125 +1,133 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <!-- common banner -->
-    <section class="common-banner">
-        <div class="bg-layer" style="background: url('{{ asset('assets/images/background/common-banner-bg.jpg') }}');"></div>
-        <div class="common-banner-content">
-            <h3>Contact Us</h3>
-            <div class="breadcrumb">
-                <ul>
-                    <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="breadcrumb-item"><i class="fa-solid fa-angles-right"></i> Contact Us</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- common banner -->
-
-    <!-- contact -->
-    <section class="contact">
+{{-- Banner Section --}}
+<section class="banner-service position-relative" style="margin-top:0px;">
+    <div class="position-relative" style="height:350px; overflow:hidden;">
+        <img src="{{ asset('assets/images/banner/banner-about.jpg') }}" 
+             alt="Banner Contact" 
+             class="w-100 h-100"
+             style="object-fit:cover; object-position:center;">
+        <div class="position-absolute top-0 start-0 w-100 h-100" 
+             style="background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);"></div>
+    </div>
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-100">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="contact-left-container">
-                        <div class="contact-image">
-                            <img src="{{ asset('assets/images/resource/feedback.png') }}" alt="image">
+            <h1 class="display-5 fw-light mb-3" 
+                style="letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                {{ __('frontend.contact') }}
+            </h1>
+        </div>
+    </div>
+</section>
+{{-- Contact Form --}}
+<section class="contact py-8">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            {{-- Left Side - Simple Illustration --}}
+            <div class="col-lg-5">
+                <div class="text-center">
+                    {{-- Simple Icon --}}
+                    <div class="contact-icon mb-4">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                            <i class="fas fa-paper-plane text-primary" style="font-size: 3rem;"></i>
                         </div>
-                        <div class="contact-shape">
-                            <img src="{{ asset('assets/images/shape/shape-3.png') }}" alt="image">
-                        </div>
-                        <div class="contact-left-blank"></div>
                     </div>
+                    
+                    {{-- Content --}}
+                    <h2 class="fw-bold mb-3">{{ __('frontend.get_in_touch') }}</h2>
+                    <p class="text-muted mb-4">
+                        {{ __('frontend.contact_description') }}
+                    </p>
                 </div>
+            </div>
+            
+            {{-- Right Side - Form --}}
+            <div class="col-lg-7">
+                <div class="bg-white rounded-3 shadow-sm p-5">
+                    <h3 class="fw-bold mb-4">{{ __('frontend.send-message') }}</h3>
+                    
+                    {{-- Alert --}}
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    @if (Session::has('warning'))
+                        <div class="alert alert-danger">
+                            {{ Session::get('warning') }}
+                        </div>
+                    @endif
+                    
+                    <form method="POST" action="{{ locale_route('frontend.send-contact') }}">
 
-                <div class="col-lg-6">
-                    <div class="contact-form">
-                        <h3>Send Feedback</h3>
-                        @if (Session::has('success'))
-                            <div class="mt-3 alert alert-success">
-                                <div class="alert-body">Thank you for sending us your message. We appreciate your feedback and will get back to you shortly.</div>
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">{{ __('frontend.full_name') }}</label>
+                                <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
                             </div>
-                        @endif
-                        @if (Session::has('warning'))
-                            <div class="mt-3 alert alert-danger">
-                                <div class="alert-body">Please double-check your entries before submitting.</div>
+                            <div class="col-md-6">
+                                <label class="form-label">{{ __('frontend.your_email') }}</label>
+                                <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
                             </div>
-                        @endif
-                        <form method="POST" action="{{ url('send_kontak') }}">
-                            @csrf
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="text" class="cmn-input" name="nama" value="{{old('nama')}}" required
-                                        placeholder="Full Name">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="email" class="cmn-input" name="email" value="{{old('email')}}" required
-                                        placeholder="Your Email">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <input type="text" class="cmn-input" name="subjek" value="{{old('subjek')}}" required placeholder="Subject">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <textarea class="cmn-input" name="pesan" required>{{old('pesan','Please fill your text here')}}</textarea>
-                                    <div class="checkbox-input">
-                                        <input type="checkbox" class="form-check-input" id="term" required>
-                                        <label for="term">I confirm that the information I am submitting is accurate and genuinely from me.</label>
-                                    </div>
-                                    <button type="submit" class="btn-1">Submit <i class="icon-arrow-1"></i></button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                         
-                    </div>
+                        <div class="mt-3">
+                            <label class="form-label">{{ __('frontend.subject') }}</label>
+                            <input type="text" name="subject" class="form-control" value="{{ old('subject') }}" required>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <label class="form-label">{{ __('frontend.your_message') }}</label>
+                            <textarea name="message" class="form-control" rows="5" required>{{ old('message') }}</textarea>
+                        </div>
+                        
+                        <div class="form-check mt-3">
+                            <input type="checkbox" class="form-check-input" id="term" required>
+                            <label class="form-check-label" for="term">
+                                {{ __('frontend.confirm_info') }}
+                            </label>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                                {{ __('frontend.submit_message') }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- contact -->
+    </div>
+</section>
 
-    <!-- Info Kontak -->
+{{-- Contact Info (mirip footer) --}}
 <section class="contact-details py-5">
     <div class="container">
-        <div class="row g-4">
-            <p class="text-center">Or contact us via email and by visiting our office</p>
-            <div class="col-lg-3 col-md-6">
-                <div class="contact-card h-100 p-4 rounded-lg shadow-sm text-center hover:shadow-md transition-all">
-                    <div class="contact-icon mb-3">
-                        <i class="fas fa-envelope fa-2x text-primary"></i>
-                    </div>
-                    <div class="contact-info">
-                        <h5 class="mb-2">Email</h5>
-                        <a href="mailto:rotokemas@gmail.com" class="text-decoration-none">rotokemas@gmail.com</a>
-                    </div>
+        <div class="row g-4 justify-content-center text-center">
+            <div class="col-md-4">
+                <div class="contact-card h-100 p-4 rounded shadow-sm">
+                    <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                    <h5>Email</h5>
+                    <a href="mailto:{{ $website->email }}" class="text-dark text-decoration-none">{{ $website->email }}</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="contact-card h-100 p-4 rounded-lg shadow-sm text-center hover:shadow-md transition-all">
-                    <div class="contact-icon mb-3">
-                        <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
-                    </div>
-                    <div class="contact-info">
-                        <h5 class="mb-2">Office Address</h5>
-                        <p class="mb-0">Panin Tower, 15th Floor, Senayan City, Jalan Asia Afrika Lot. 19, Jakarta Pusat, Indonesia</p>
-                    </div>
+            <div class="col-md-4">
+                <div class="contact-card h-100 p-4 rounded shadow-sm">
+                    <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                    <h5>Phone</h5>
+                    <a href="tel:{{ $website->phone }}" class="text-dark text-decoration-none">{{ $website->phone ?? '-' }}</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-    <!-- contact map -->
+{{-- Google Map --}}
 <section class="contact-map">
     <div class="container">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d991.5699225058963!2d106.79698196257067!3d-6.226807099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f34255e24887%3A0x1c42ed6c5f419a64!2sGoWork%20Senayan%20City%20-%20Coworking%20and%20Office%20Space!5e0!3m2!1sen!2sid!4v1745019609927!5m2!1sen!2sid"
-            width="100%" height="450" style=F"border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+    {!! $website->maps ?? '' !!}
+</div>
 </section>
-<!-- contact map -->
 @endsection

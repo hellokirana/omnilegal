@@ -8,6 +8,7 @@ use App\Models\News;
 use App\Models\Stat;
 use App\Models\Team;
 use App\Models\Slider;
+use App\Models\Contact;
 use App\Models\Service;
 use App\Models\Website;
 use App\Models\Disclaimer;
@@ -106,7 +107,36 @@ class FrontendController extends Controller
             'disclaimer'
         ));
     }
-    
+    public function contact()
+    {
+        $website = Website::first();
+        return view('frontend.contact', compact('website'));
+    }
+
+    public function send_contact(Request $request)
+    {
+        $validated = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        if ($validated->fails()) {
+            Session::flash('warning', __('frontend.send_fail'));
+            return redirect()->back()
+                ->withErrors($validated)
+                ->withInput();
+        }
+
+        $data = new Contact();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->message = $request->message;
+        $data->subject = $request->subject;
+        $data->save();
+        return redirect()->back()->with('success', __('frontend.send_success'));
+    }
 
 
     public function media(Request $request)
@@ -185,31 +215,8 @@ class FrontendController extends Controller
         return view('frontend.our_member', compact('founders', 'members', 'testimoni_all', 'testimoni_founder'));
     }
 
-    
 
-    public function send_kontak(Request $request)
-    {
-        $validated = Validator::make($request->all(), [
-            'nama' => 'required',
-            'email' => 'required',
-            'subjek' => 'required',
-            'pesan' => 'required',
-        ]);
 
-        if ($validated->fails()) {
-            Session::flash('warning', 'data gagal di simpan');
-            return redirect()->back()
-                ->withErrors($validated)
-                ->withInput();
-        }
 
-        $data = new Kontak();
-        $data->nama = $request->nama;
-        $data->email = $request->email;
-        $data->pesan = $request->pesan;
-        $data->subjek = $request->subjek;
-        $data->save();
-        return redirect()->back()->with('success', 'Pesan berhasil di kirim');
-    }
 
 }

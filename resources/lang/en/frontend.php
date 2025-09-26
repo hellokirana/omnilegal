@@ -25,4 +25,18 @@ further information",
     'contact-us' => 'Contact Us',
     'visit-us' => 'Visit Us at',
     'send-message' => 'Send message',
+
+    'get_in_touch' => "We're Here to Help",
+    'contact_description' => 'Get in touch for trusted legal services in our areas of expertise.',
+
+    'full_name' => 'Full Name',
+    'your_email' => 'Your Email',
+    'subject' => 'Subject',
+    'your_message' => 'Your Message',
+    'confirm_info' => 'I confirm that the information I provide is true and accurate.',
+    'submit_message' => 'Submit Message',
+
+    'send_success' => 'Message sent successfully',
+    'send_fail' => 'Failed to save data',
+
 ];
