@@ -11,8 +11,9 @@ use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Data\MemberController;
 use App\Http\Controllers\Data\WorkerController;
 
-use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\CareerController;
 
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\AgendaMemberController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContentController;
@@ -64,6 +65,7 @@ Route::group(['middleware' => 'auth', 'approved', 'verified'], function () {
             Route::resource('team', TeamController::class);
             Route::resource('website', WebsiteController::class);
             Route::resource('inbox', ContactController::class);
+            Route::resource('career', CareerController::class);
             Route::resource('slider', SliderController::class);
             Route::resource('disclaimer', DisclaimerController::class);
             Route::resource('description', DescriptionController::class);
