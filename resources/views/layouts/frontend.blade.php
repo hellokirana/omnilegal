@@ -8,6 +8,7 @@
 
     <!-- Stylesheets -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/module-css/reward.css') }}">
     
 
     <!-- Favicon -->
@@ -79,10 +80,10 @@
                                         <ul class="navigation">
                                             <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.home') }}</a></li>
                                             <li><a href="{{ locale_route('frontend.service') }}">{{ __('frontend.services') }}</a></li>
-                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.about') }}</a></li>
-                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.news') }}</a></li>
-                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.career') }}</a></li>
-                                            <li><a href="{{ locale_route('frontend.index') }}">{{ __('frontend.contact') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.about') }}">{{ __('frontend.about') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.news') }}">{{ __('frontend.news') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.career') }}">{{ __('frontend.career') }}</a></li>
+                                            <li><a href="{{ locale_route('frontend.contact') }}">{{ __('frontend.contact') }}</a></li>
                                         </ul>
                                     </div>
                                 </nav>
@@ -232,7 +233,7 @@
 
         <!-- Copyright -->
         <div class="text-center border-top pt-3 mt-3">
-            <p class="mb-0">&copy; {{ date('Y') }} {{ $website->nama ?? 'Company' }} | All rights reserved</p>
+            <p class="mb-0">{{ __('frontend.legal') }}</p>
         </div>
     </div>
 </footer>

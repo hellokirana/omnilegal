@@ -40,6 +40,8 @@ Route::prefix('{locale}')
         Route::get('/career', [FrontendController::class, 'our_member'])->name('frontend.career');
         Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
         Route::post('/send-contact', [FrontendController::class, 'send-contact'])->name('frontend.send-contact');
+        Route::get('/disclaimer', [FrontendController::class, 'disclaimer'])->name('frontend.disclaimer');
+
     });
 Auth::routes(['verify' => true]);
 

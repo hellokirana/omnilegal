@@ -10,6 +10,7 @@ use App\Models\Team;
 use App\Models\Slider;
 use App\Models\Service;
 use App\Models\Website;
+use App\Models\Disclaimer;
 use App\Models\Description;
 use App\Models\PracticeArea;
 use Illuminate\Http\Request;
@@ -74,6 +75,38 @@ class FrontendController extends Controller
         ));
     }
 
+    public function about()
+    {
+        $website = Website::first();
+        $homeTeam = Home::find('8b5c8d2a-be27-43c1-a9ac-54fbdb044a98');
+        $homeAbout = Home::find('62e82228-9a7a-11f0-81d4-cc6b1e6d7dc0');
+        $teams = Team::all();
+        $descriptions = Description::first();
+        $disclaimer = Disclaimer::first();
+
+        return view('frontend.about', compact(
+            'website',
+            'homeTeam',
+            'teams',
+            'descriptions',
+            'homeAbout',
+            'disclaimer'
+        ));
+    }
+
+    public function disclaimer()
+    {
+        $website = Website::first();
+        $descriptions = Description::first();
+        $disclaimer = Disclaimer::first();
+
+        return view('frontend.disclaimer', compact(
+            'website',
+            'descriptions',
+            'disclaimer'
+        ));
+    }
+    
 
 
     public function media(Request $request)
@@ -139,12 +172,6 @@ class FrontendController extends Controller
         return view('frontend.media_detail', compact('data', 'data_related', 'featuredArticles'));
     }
 
-
-    public function about()
-    {
-        return view('frontend.about');
-    }
-
     public function our_member()
     {
         $founders = Testimoni::where('type', 'Founder')->get();
@@ -158,10 +185,7 @@ class FrontendController extends Controller
         return view('frontend.our_member', compact('founders', 'members', 'testimoni_all', 'testimoni_founder'));
     }
 
-    public function contact()
-    {
-        return view('frontend.contact');
-    }
+    
 
     public function send_kontak(Request $request)
     {

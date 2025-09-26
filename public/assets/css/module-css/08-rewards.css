@@ -1,3 +1,168 @@
+.team-card-horizontal {
+    background: #fff;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.team-card-horizontal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+.team-card-horizontal:hover .team-profile-img {
+    transform: scale(1.05);
+}
+
+.team-profile-img {
+    border: 3px solid #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Alternative circular image option */
+.team-profile-img.circular {
+    border-radius: 50% !important;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Portrait/landscape adaptive container */
+.team-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.team-image-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    z-index: 0;
+}
+
+.team-card-horizontal:hover .team-overlay {
+    opacity: 1;
+}
+
+.email-link {
+    transition: all 0.2s ease;
+}
+
+.email-link:hover {
+    color: #0056b3 !important;
+    text-decoration: underline !important;
+}
+
+.contact-btn {
+    transition: all 0.2s ease;
+    border-radius: 50px;
+    padding: 8px 20px;
+}
+
+.contact-btn:hover {
+    background-color: #007bff;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.read-more-btn {
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.read-more-btn:hover {
+    color: #0056b3 !important;
+    text-decoration: none !important;
+    transform: translateX(3px);
+}
+
+.read-more-btn:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.read-more-btn i {
+    transition: transform 0.2s ease;
+}
+
+.read-more-btn .chevron-icon {
+    transition: transform 0.2s ease;
+}
+
+.read-more-btn[data-expanded="true"] .chevron-icon {
+    transform: rotate(180deg);
+}
+.disclaimer-content {
+    font-size: 1rem;
+    line-height: 0.5 !important;
+    color: #6c757d;
+}
+
+.disclaimer-content p {
+    margin-bottom: 0.5rem;
+}
+
+.disclaimer-content h6,
+.disclaimer-content h5 {
+    color: #495057;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.disclaimer-content ul,
+.disclaimer-content ol {
+    margin-bottom: 0.75rem;
+}
+
+.disclaimer-content li {
+    margin-bottom: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .disclaimer-content {
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+
+    .disclaimer-content p {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .team-image-container {
+        min-height: 250px !important;
+        padding: 2rem !important;
+    }
+
+    .team-profile-img {
+        max-height: 220px !important;
+    }
+
+    .team-card-horizontal .card-body {
+        padding: 1.5rem !important;
+    }
+
+    .contact-btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+/* Animation for description expand */
+.description-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
 /* news slide */
 .news-card {
     background: #fff;

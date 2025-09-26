@@ -1,243 +1,221 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <!-- common banner -->
-    <section class="common-banner">
-        <div class="bg-layer" style="background: url('{{ asset('assets/images/background/common-banner-bg.jpg')}}');"></div>
-        <div class="common-banner-content">
-            <h3>About</h3>
-            <div class="breadcrumb">
-                <ul>
-                    <li class="breadcrumb-item active"><a href="{{ url('/')}}">Home</a></li>
-                    <li class="breadcrumb-item"><i class="fa-solid fa-angles-right"></i> About</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- common banner -->
 
-
-    <!-- about page -->
-    <section class="about-page">
+{{-- Banner Section --}}
+<section class="banner-service position-relative" style="margin-top:0px;">
+    <div class="position-relative" style="height:350px; overflow:hidden;">
+        <img src="{{ asset('assets/images/banner/banner-about.jpg') }}" 
+             alt="Banner About" 
+             class="w-100 h-100"
+             style="object-fit:cover; object-position:center;">
+        <div class="position-absolute top-0 start-0 w-100 h-100" 
+             style="background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);"></div>
+    </div>
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-100">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="about-page-left">
-                        <div class="yellow-shape"></div>
-                        <div class="pink-shape"></div>
-                        <div class="about-page-left-image">
-                            <img src="{{ asset('assets/images/resource/rotokemas.png') }}" alt="image">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="rewards-left-container">
-                        <div class="rewards-left-container-inner">
-                            <div class="common-title mb_30">
-                                <h6><i class="fa-solid fa-angles-right"></i>SHOWING</h6>
-                                <h3>About Rotokemas Indonesia</h3>
-                                <p style="text-align: justify;">The Packaging Industry Association - Rotokemas is an organization established to support the development of the packaging industry in Indonesia, focusing on innovation, standardization, and collaboration among industry players. Rotokemas has served as a platform for packaging companies to share knowledge, enhance production quality, and expand business networks.</p>
-                            </div>
-                            <div class="rewards-left-list">
-                                <ul>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Strong Industry Network</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Focus on Innovation</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Quality & Standardization Support</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Knowledge Sharing & Skill Development</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Business Expansion Opportunities</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Credibility & Trust</li>
-                                    <li><i class="fa-sharp fa-light fa-circle-check"></i>Advocacy & Industry Voice</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h1 class="display-5 fw-light mb-3" 
+                style="letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                {{ __('frontend.about') }}
+            </h1>
+            <p class="fw-light mb-0 text-white" 
+               style="font-weight:300; max-width:600px; margin:0 auto; line-height:1.6; 
+                      text-shadow:0 1px 2px rgba(0,0,0,0.3);">
+                {{ $homeTeam->{'description_'.app()->getLocale()} }}
+            </p>
         </div>
-    </section>
-    <!-- about page -->
+    </div>
+</section>
 
-    <!-- rotokemas history -->
-<section class="rotokemas-history py-5 bg-white">
+{{-- Omnilegal About Section --}}
+<section id="about" class="py-5 bg-light">
     <div class="container">
-        <div class="common-title text-center mb-5">
-            <h6><i class="fa-solid fa-angles-right"></i>OUR HISTORY</h6>
-            <h3>Historical Milestones of Rotokemas</h3>
+      
+        <div class="mb-5">
+            <div class="row align-items-center justify-content-center">
+                
+                {{-- Logo --}}
+                <div class="col-md-3 text-center mb-3 mb-md-0">
+                    <img src="{{ asset('assets/images/logo.png') }}" 
+                         alt="Omnilegal Logo" 
+                         class="img-fluid" 
+                         style="max-height:150px;">
+                </div>
+
+                {{-- Text Content --}}
+                <div class="col-md-7">
+                    <h2 class="fw-bold mb-3">
+                        {{ $homeAbout->{'title_'.app()->getLocale()} ?? '' }}
+                    </h2>
+                    <p class="text-muted" style="line-height:1.8;">
+                        {!! $descriptions->{'about_'.app()->getLocale()} ?? '' !!}
+                    </p>
+                </div>
+
+            </div>
         </div>
 
-        <div class="timeline">
-
-            <!-- 1979/1980 -->
-            <div class="timeline-item mb-5">
-                <h5 class="fw-bold">1979/1980 – The Early Foundation</h5>
-                <p>
-                    The name “Rotokemas Indonesia” originated from a collective initiative of rotogravure and packaging companies in Indonesia. 
-                    This informal group served as a platform for collaboration and information exchange among industry players.
-                </p>
-            </div>
-
-            <!-- 2023 -->
-            <div class="timeline-item mb-5">
-                <h5 class="fw-bold">2023 – First General Meeting</h5>
-                <p>
-                    The first official general meeting was held on <strong>March 16, 2023</strong> at <strong>Swissotel PIK Avenue Laussane 2 Lantai 7 Pantai Indah Kapuk</strong>.
-                    It marked the formal establishment of the association under Indonesian law.
-                </p>
-                <p><strong>Legal Basis:</strong> Deed No. 06, dated December 6, 2023, by Notary Nilda, SH.</p>
-                <p><strong>Ministry Approval:</strong> AHU-0011092.AH.01.07.2023, issued on December 18, 2023.</p>
-                <p><strong>Founding Board:</strong></p>
-                <ul class="ms-4">
-                    <li>Timothy Cahyadi (Toppan Plasindo Lestari) – Chairman</li>
-                    <li>Purnomo Widjaja (PT Lawangmas Primapack Indonesia) – Secretary</li>
-                    <li>Jeffrey Halim (PT Supernova Flexible Packaging) – Treasurer</li>
-                    <li>Bong Harly (PT DNP Indonesia) – Supervisor</li>
-                    <li>Johanes Julia (PT Indofood CBP Sukses Makmur Tbk) – Vice Supervisor</li>
-                    <li>Se Kwok Rahardjo (PT Prima Makmur Rotokemindo) – Member Supervisor</li>
-                </ul>
-            </div>
-
-            <!-- 2024 -->
-            <div class="timeline-item mb-5">
-                <h5 class="fw-bold">2024 – Second General Meeting</h5>
-                <p>
-                    Held on <strong>June 20, 2024</strong> at <strong>Hotel Borobudur Jakarta (Singosari Room)</strong>, 
-                    the meeting reviewed organizational progress and planned further programs.
-                </p>
-            </div>
-
-            <!-- 2025 -->
-            <div class="timeline-item mb-0">
-                <h5 class="fw-bold">2025 – Third General Meeting</h5>
-                <p>
-                    The third general meeting was conducted on <strong>June 4, 2025</strong> at <strong>Hotel Grand Mercure (Lotus 1 Room)</strong>, 
-                    continuing the association’s commitment to industry development and member engagement.
-                </p>
-            </div>
-
-        </div>
     </div>
 </section>
-<!-- rotokemas history -->
 
-{{-- structure --}}
-<section class="organization-structure py-5">
-    <div class="container text-center">
-        <div class="common-title text-center mb-4">
-            <h6>2023 - 2026</h6>
-            <h3>Organizational Structure</h3>
-        </div>
-
-        <div class="about-page-image">
-            <img src="{{ asset('assets/images/resource/structure.png') }}" alt="image" style="max-width: 100%; width: 500px; height: auto;">
-        </div>
-    </div>
-</section>
-{{-- structure --}}
-
-
-    <!-- contact page -->
-<section class="contact-section bg-light py-5">
+<!-- Modern Horizontal Team Section -->
+<section class="team-section py-5 bg-white">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="contact-content position-relative">
-                    <div class="common-title mb-4">
-                        <h6><i class="fa-solid fa-angles-right"></i>CONTACT US</h6>
-                        <h3>Would you like to get in touch with us?</h3>
-                        <p>If you have any feedback, suggestions, or inquiries, please do not hesitate to contact us. We highly value your input.</p>
-                    </div>
-                    <div class="mt-4">
-                        <a href="{{ url('/kontak') }}" class="btn-1">Contact Us<i class="icon-arrow-1"></i></a>
-                    </div>
 
-                    <!-- Decorative elements -->
-                    <div class="yellow-shape position-absolute" style="top: -20px; right: -20px; width: 100px; height: 100px; background-color: #ffd700; opacity: 0.2; border-radius: 50%;"></div>
-                    <div class="pink-shape position-absolute" style="bottom: -30px; left: -30px; width: 150px; height: 150px; background-color: #ff69b4; opacity: 0.1; border-radius: 50%;"></div>
+        <!-- Section Title -->
+        <div class="text-center mb-5">
+            <h2 class="text-primary fw-bold mb-3">{{ $homeTeam->title }}</h2>
+            <div class="mx-auto" style="width: 60px; height: 4px; background: linear-gradient(to right, #007bff, #0056b3);"></div>
+        </div>
+
+        <!-- Horizontal Team Cards -->
+        <div class="team-container">
+            @foreach($teams as $index => $team)
+                <div class="team-card-horizontal shadow-sm border-0 rounded-3 overflow-hidden mb-4" style="transition: all 0.3s ease;">
+                    <div class="row g-0 align-items-center">
+                        
+                        <!-- Team Member Image -->
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <div class="team-image-container position-relative d-flex align-items-center justify-content-center p-3" 
+                                 style="min-height: 200px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                                <img src="{{ $team->image_url }}" 
+                                     alt="{{ $team->name }}" 
+                                     class="img-fluid rounded-3 shadow-sm team-profile-img" 
+                                     style="max-height: 280px; max-width: 100%; object-fit: contain; transition: transform 0.3s ease;">
+                                <div class="team-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded-3" 
+                                     style="background: rgba(0,123,255,0.9); opacity: 0; transition: opacity 0.3s ease;">
+                                    <div class="text-white text-center">
+                                        <i class="fas fa-envelope fa-2x mb-2"></i>
+                                        <p class="mb-0 fw-medium">Contact Me</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Team Member Info -->
+                        <div class="col-12 col-md-8 col-lg-9">
+                            <div class="card-body p-4 p-lg-5">
+                                
+                                <!-- Name and Email Header -->
+                                <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h4 class="fw-bold text-dark mb-1">{{ $team->name }}</h4>
+                                        <div class="d-flex align-items-center text-primary">
+                                            <i class="fas fa-envelope me-2"></i>
+                                            <a href="mailto:{{ $team->email }}" 
+                                               class="text-decoration-none fw-medium email-link">
+                                                {{ $team->email }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description with Read More/Less -->
+                                <div class="team-description">
+                                    <div class="description-content">
+                                        <p class="text-muted mb-3" 
+                                           id="desc-{{ $index }}" 
+                                           style="line-height: 1.7; font-size: 1rem;">
+                                            {{ Str::limit($team->{'description_'.app()->getLocale()} ?? $team->description, 200, '...') }}
+                                        </p>
+                                        
+                                        @if(strlen($team->{'description_'.app()->getLocale()} ?? $team->description) > 200)
+                                            <!-- Full Description (Hidden by default) -->
+                                            <p class="text-muted mb-3 d-none" 
+                                               id="full-desc-{{ $index }}" 
+                                               style="line-height: 1.7; font-size: 1rem;">
+                                                {{ $team->{'description_'.app()->getLocale()} ?? $team->description }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                    
+                                    @if(strlen($team->{'description_'.app()->getLocale()} ?? $team->description) > 200)
+                                        <!-- Read More/Less Button -->
+                                        <button class="btn btn-link p-0 text-primary fw-medium border-0 bg-transparent read-more-btn" 
+                                                data-index="{{ $index }}" 
+                                                data-read-more="{{ __('frontend.read-more') }}"
+                                                data-read-less="{{ __('frontend.read-less') }}"
+                                                data-expanded="false"
+                                                style="font-size: 0.95rem; text-decoration: none;">
+                                            <i class="fas fa-chevron-down me-1 chevron-icon"></i>
+                                            {{ __('frontend.read-more') }}
+                                        </button>
+                                    @endif
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="contact-image position-relative">
-                    <img src="{{ asset('assets/images/resource/feedback.png') }}" alt="contact"">
-                </div>
-            </div>
-            
+            @endforeach
         </div>
     </div>
 </section>
-<!-- contact page  -->
 
-<!-- Partner Registration Steps -->
-    {{-- <section class="registration-steps py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center mb-5">
-                    <div class="common-title">
-                        <h6><i class="fa-solid fa-angles-right"></i>REGISTRATION FLOW</h6>
-                        <h3>Become a Member of Rotokemas</h3>
-                        <p>Follow these steps to officially join the Packaging Industry Association – Rotokemas:</p>
+
+<section class="py-8 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-primary mb-4"style="margin-top:2rem;">Disclaimer</h2>
+
+                    <div class="bg-white rounded-3 shadow-sm p-5">
+                        <small>
+                            {!! $descriptions->{'disclaimer_'.app()->getLocale()} ?? '' !!}
+                        </small>
+
+
+                        <hr class="my-4 opacity-25">
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{{ locale_route('frontend.disclaimer') }}" 
+                               class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-sm">
+                                <i class="fas fa-info-circle me-2"></i>
+                                {{ __('frontend.check-disclaimer') }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row justify-content-center">
-                <!-- Step 1 -->
-                <div class="col-lg-4 mb-4">
-                    <div class="step-card position-relative bg-white rounded-lg p-4 h-100 shadow-sm">
-                        <div class="step-number position-absolute" style="top: -15px; left: -15px; width: 40px; height: 40px; background-color: #007bff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
-                        <div class="step-icon text-center mb-3">
-                            <i class="fa-solid fa-graduation-cap fa-3x text-primary"></i>
-                        </div>
-                        <h4 class="text-center mb-3">Complete the Registration Form</h4>
-                        <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <i class="fa-solid fa-check text-success me-2"></i>
-                                Access the official registration link provided by Rotokemas and fill in the required company and contact information accurately.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="col-lg-4 mb-4">
-                    <div class="step-card position-relative bg-white rounded-lg p-4 h-100 shadow-sm">
-                        <div class="step-number position-absolute" style="top: -15px; left: -15px; width: 40px; height: 40px; background-color: #007bff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">2</div>
-                        <div class="step-icon text-center mb-3">
-                            <i class="fa-solid fa-certificate fa-3x text-warning"></i>
-                        </div>
-                        <h4 class="text-center mb-3">Await Administrative Confirmation
-                        </h4>
-                        <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <i class="fa-solid fa-check text-success me-2"></i>
-                                After submitting your registration, please wait for confirmation from the Rotokemas administration team. You will be notified once your application has been reviewed.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="col-lg-4 mb-4">
-                    <div class="step-card position-relative bg-white rounded-lg p-4 h-100 shadow-sm">
-                        <div class="step-number position-absolute" style="top: -15px; left: -15px; width: 40px; height: 40px; background-color: #007bff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div>
-                        <div class="step-icon text-center mb-3">
-                            <i class="fa-solid fa-handshake fa-3x text-success"></i>
-                        </div>
-                        <h4 class="text-center mb-3">Receive Official Membership Status</h4>
-                        <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <i class="fa-solid fa-check text-success me-2"></i>
-                                Once approved, your company will be officially recognized as a member of Rotokemas and included in our member database.
-                            </li>
-                            </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-8 text-center">
-                    <h3 class="mb-3">Are you ready to be part of Rotokemas??</h3>
-                </div>
-            </div> --}}
         </div>
-    </section>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const readMoreBtns = document.querySelectorAll('.read-more-btn');
+    
+    readMoreBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const index = this.getAttribute('data-index');
+            const readMoreText = this.getAttribute('data-read-more');
+            const readLessText = this.getAttribute('data-read-less');
+            const shortDesc = document.getElementById('desc-' + index);
+            const fullDesc = document.getElementById('full-desc-' + index);
+            const chevronIcon = this.querySelector('.chevron-icon');
+            
+            if (fullDesc.classList.contains('d-none')) {
+                // Show full description
+                shortDesc.classList.add('d-none');
+                fullDesc.classList.remove('d-none');
+                this.setAttribute('data-expanded', 'true');
+                
+                // Update button text only
+                this.innerHTML = '<i class="fas fa-chevron-down me-1 chevron-icon"></i>' + readLessText;
+            } else {
+                // Show short description
+                fullDesc.classList.add('d-none');
+                shortDesc.classList.remove('d-none');
+                this.setAttribute('data-expanded', 'false');
+                
+                // Update button text only
+                this.innerHTML = '<i class="fas fa-chevron-down me-1 chevron-icon"></i>' + readMoreText;
+            }
+        });
+    });
+});
+</script>
+
 @endsection
