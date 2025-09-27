@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-XyGZ1AvwLhkdME9YyUw5o2qvWZt1Qo8h1FZZbGQUFdA+cS9bYOzCXh3n4gxQ3VnTZhKLG1rKcsEtTXCvC8Ybnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -140,11 +141,8 @@
                 <nav class="menu-box">
                     <div class="nav-logo"><a href="{{ url('/') }}"><img
                                 src="{{ asset('assets/images/logo.png') }}" alt="logo"></a></div>
-                    
-                    {{-- Language Switch for Mobile Menu --}}
                     @include('layouts.partials.language-switch', ['context' => 'mobile', 'type' => 'dropdown'])
                     <div class="menu-outer">
-                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
                     </div>
                 </nav>
             </div>
@@ -155,35 +153,36 @@
 
         @yield('content')
 
-        <!-- Footer -->
-<footer id="footer" class="main-footer py-5 border-top">
+        <footer id="footer" class="main-footer py-5 border-top">
     <div class="container">
         <div class="row">
 
             <!-- Left Section -->
-            <div class="col-lg-6 mb-4">
-                <h3 class="fw-bold text-primary">{{ __('frontend.footer1') }}<br>{{ __('frontend.footer2') }}</h3>
+            <div class="col-lg-6 mb-4" data-aos="fade-right" data-aos-duration="1000">
+                <h3 class="fw-bold text-primary">
+                    {{ __('frontend.footer1') }}<br>{{ __('frontend.footer2') }}
+                </h3>
                 <p class="mt-3">{{ __('frontend.footer-caption') }}</p>
 
                 <!-- Social Media -->
                 <div class="mt-3">
                     @if($website && $website->instagram)
-                        <a href="{{ $website->instagram }}" target="_blank" class="me-2">
+                        <a href="{{ $website->instagram }}" target="_blank" class="me-2" data-aos="zoom-in" data-aos-duration="800">
                             <i class="fab fa-instagram fa-2x"></i>
                         </a>
                     @endif
                     @if($website && $website->linkedin)
-                        <a href="{{ $website->linkedin }}" target="_blank" class="me-2">
+                        <a href="{{ $website->linkedin }}" target="_blank" class="me-2" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
                             <i class="fab fa-linkedin fa-2x"></i>
                         </a>
                     @endif
                     @if($website && $website->facebook)
-                        <a href="{{ $website->facebook }}" target="_blank" class="me-2">
+                        <a href="{{ $website->facebook }}" target="_blank" class="me-2" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
                             <i class="fab fa-facebook fa-2x"></i>
                         </a>
                     @endif
                     @if($website && $website->x)
-                        <a href="{{ $website->x }}" target="_blank" class="me-2">
+                        <a href="{{ $website->x }}" target="_blank" class="me-2" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
                             <i class="fab fa-x-twitter fa-2x"></i>
                         </a>
                     @endif
@@ -191,33 +190,26 @@
             </div>
 
             <!-- Right Section -->
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-6 mb-4" data-aos="fade-left" data-aos-duration="1000">
                 <h4 class="fw-bold text-primary mb-3">{{ __('frontend.contact-us') }}</h4>
                 <p class="mb-0">
-    <i class="fas fa-paper-plane me-2 text-primary"></i>
-    <a href="{{ locale_route('frontend.contact') }}#send-message" class="text-dark text-decoration-none">
-        {{ __('frontend.send-message') }}
-    </a>
-</p>
-<p class="mb-2">
-    <i class="fas fa-phone me-2 text-primary"></i>
-    <a href="tel:{{ $website->phone }}" class="text-dark text-decoration-none">
-        {{ $website->phone ?? '-' }}
-    </a>
-</p>
-<p class="mb-4">
-    <i class="fas fa-envelope me-2 text-primary"></i>
-    <a href="mailto:{{ $website->email }}" class="text-dark text-decoration-none">
-        {{ $website->email }}
-    </a>
-</p>
-
-
-
-
-
-                
-
+                    <i class="fas fa-paper-plane me-2 text-primary"></i>
+                    <a href="{{ locale_route('frontend.contact') }}#send-message" class="text-dark text-decoration-none">
+                        {{ __('frontend.send-message') }}
+                    </a>
+                </p>
+                <p class="mb-2">
+                    <i class="fas fa-phone me-2 text-primary"></i>
+                    <a href="tel:{{ $website->phone }}" class="text-dark text-decoration-none">
+                        {{ $website->phone ?? '-' }}
+                    </a>
+                </p>
+                <p class="mb-4">
+                    <i class="fas fa-envelope me-2 text-primary"></i>
+                    <a href="mailto:{{ $website->email }}" class="text-dark text-decoration-none">
+                        {{ $website->email }}
+                    </a>
+                </p>
 
                 <h4 class="fw-bold text-primary mb-3">{{ __('frontend.visit-us') }}</h4>
                 <p>
@@ -274,6 +266,15 @@
     <script src="{{ asset('assets/js/flatpickr-min.js') }}"></script>
     <script src="{{ asset('assets/js/socialSharing.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        duration: 1000, // durasi animasi (ms)
+        once: false,
+        mirror: true,
+    });
+    </script>
+    
     
     @stack('scripts')
 

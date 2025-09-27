@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- Banner Section --}}
-<section class="banner-service position-relative" style="margin-top:0px;">
+<section class="banner-service position-relative" style="margin-top:0px;" data-aos="fade-right" data-aos-duration="1200">
     <div class="position-relative" style="height:350px; overflow:hidden;">
         <img src="{{ asset('assets/images/banner/banner-about.jpg') }}" 
              alt="Banner Contact" 
@@ -12,7 +12,7 @@
              style="background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);"></div>
     </div>
     <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-100">
-        <div class="container">
+        <div class="container" data-aos="fade-up" data-aos-delay="200">
             <h1 class="display-5 fw-light mb-3" 
                 style="letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
                {{ $homeCareer->{'title_'.app()->getLocale()} }}
@@ -25,18 +25,21 @@
         </div>
     </div>
 </section>
+
+{{-- Career Section --}}
 <section class="career py-8">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="bg-white rounded-3 shadow-sm p-5">
+                <div class="bg-white rounded-3 shadow-sm p-5" data-aos="fade-up" data-aos-delay="100">
                     <h2 class="fw-bold mb-4 text-center">{{ __('frontend.join_our_team') }}</h2>
-                    <p class="career-description text-muted text-center mb-4" style="text-align: center">
-                       {!! $description->{'career_'.app()->getLocale()} !!}
+                    <p class="career-description text-muted text-center mb-4">
+                       {!! $description->{'career_'.app()->getLocale()} !!} 
                     </p>
+
                     {{-- Alerts --}}
                     @if (Session::has('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success" data-aos="fade-up">
                             {{ Session::get('success') }}
                             @if(Session::has('file_url'))
                                 <br>
@@ -47,12 +50,12 @@
                         </div>
                     @endif
                     @if (Session::has('warning'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger" data-aos="fade-up">
                             {{ Session::get('warning') }}
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ locale_route('frontend.send-career') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ locale_route('frontend.send-career') }}" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="200">
                         @csrf
 
                         <div class="mb-3">
@@ -99,33 +102,17 @@
     </div>
 </section>
 
+@push('styles')
+<style>
+    /* Hover zoom effect for contact cards */
+    .contact-card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-card-hover:hover {
+        transform: scale(1.03);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+</style>
+@endpush
 
-{{-- Contact Info (mirip footer) --}}
-<section class="contact-details py-5">
-    <div class="container">
-        <div class="row g-4 justify-content-center text-center">
-            <div class="col-md-4">
-                <div class="contact-card h-100 p-4 rounded shadow-sm">
-                    <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
-                    <h5>Email</h5>
-                    <a href="mailto:{{ $website->email }}" class="text-dark text-decoration-none">{{ $website->email }}</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="contact-card h-100 p-4 rounded shadow-sm">
-                    <i class="fas fa-phone fa-2x text-primary mb-2"></i>
-                    <h5>Phone</h5>
-                    <a href="tel:{{ $website->phone }}" class="text-dark text-decoration-none">{{ $website->phone ?? '-' }}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- Google Map --}}
-<section class="contact-map">
-    <div class="container">
-    {!! $website->maps ?? '' !!}
-</div>
-</section>
 @endsection

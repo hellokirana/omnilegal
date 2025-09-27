@@ -59,7 +59,7 @@ class Slider extends Model
     {
         return $this->image
             ? asset('storage/slider/' . $this->image)
-            : asset('assets/images/default-slider.jpg'); // default image
+            : null;
     }
 
 
