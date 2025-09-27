@@ -46,13 +46,13 @@ class WebsiteSeeder extends Seeder
 
         $data->save();
 
-        Role::create(['name' => 'superadmin']);
-        Role::create(['name' => 'admin']);
+        Role::firstOrCreate(['name' => 'superadmin']);
+        Role::firstOrCreate(['name' => 'admin']);
 
         $super = new User();
         $super->name = 'superadmin';
         $super->email = 'superadmin@omnilegal.com';
-        $super->password = bcrypt('12345678');
+        $super->password = bcrypt('Qx1qKDrpD23');
         $super->status = 1;
 
         $super->save();
